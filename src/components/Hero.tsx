@@ -1,0 +1,101 @@
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { LockSimple } from "@phosphor-icons/react";
+import { Button } from "./ui/Button";
+import { Magnetic } from "./ui/Magnetic";
+import { Eyebrow } from "./ui/Eyebrow";
+import { LogoMark } from "./ui/LogoMark";
+import { MonogramWindow } from "./ui/MonogramWindow";
+import { patternStyle } from "../lib/patterns";
+import { CATALOGO_URL } from "../data/site";
+
+export function Hero() {
+  const reduce = useReducedMotion();
+
+  const container: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: reduce ? 0 : 0.12, delayChildren: 0.15 } },
+  };
+  const item: Variants = {
+    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 22 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  return (
+    <section
+      id="topo"
+      className="relative flex min-h-[100dvh] items-center overflow-hidden pb-20 pt-24"
+    >
+      {/* Monograma fantasma: arquitetura ao fundo, sangrando pela direita */}
+      <LogoMark className="pointer-events-none absolute right-[-13vw] top-1/2 hidden h-[108vh] w-[53vh] -translate-y-1/2 opacity-[0.04] lg:block" />
+
+      {/* Moldura blueprint: cantos finos (atelier / planta técnica) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-[clamp(20px,5vw,80px)] bottom-12 top-28 hidden lg:block"
+      >
+        <span className="absolute left-0 top-0 h-5 w-5 border-l border-t border-[var(--color-line)]" />
+        <span className="absolute right-0 top-0 h-5 w-5 border-r border-t border-[var(--color-line)]" />
+        <span className="absolute bottom-0 left-0 h-5 w-5 border-b border-l border-[var(--color-line)]" />
+        <span className="absolute bottom-0 right-0 h-5 w-5 border-b border-r border-[var(--color-line)]" />
+      </div>
+
+      <div className="container-scf relative grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+        {/* Tipografia */}
+        <motion.div
+          className="lg:col-span-6"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.div variants={item} className="mb-7">
+            <Eyebrow>Estamparia digital têxtil · desde [19XX]</Eyebrow>
+          </motion.div>
+
+          <h1 className="font-display text-[clamp(46px,7.2vw,98px)] font-light leading-[0.95] tracking-[-0.03em] text-ink">
+            <motion.span variants={item} className="block">
+              A cor que o tecido
+            </motion.span>
+            <motion.span variants={item} className="block pb-1 font-medium leading-[1.05]">
+              não esquece.
+            </motion.span>
+          </h1>
+
+          <motion.p
+            variants={item}
+            className="mt-7 max-w-[46ch] text-[19px] leading-[1.55] text-ink-2"
+          >
+            Estamparia digital de alta definição para marcas que tratam a
+            estampa como identidade. Da arte à fixação.
+          </motion.p>
+
+          <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
+            <Magnetic>
+              <Button href="#acervo" variant="indigo">
+                Ver o acervo
+              </Button>
+            </Magnetic>
+            <Button href={CATALOGO_URL} variant="ghost" external>
+              <LockSimple size={16} weight="bold" aria-hidden="true" />
+              Área do Cliente
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Monograma-vitrine: a estampa vista ATRAVÉS da marca SCF.
+            Revela subindo, como o pigmento tingindo a trama. */}
+        <div className="relative lg:col-span-6">
+          <motion.div
+            className="mx-auto w-fit"
+            initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <MonogramWindow className="h-[58vh] max-h-[620px] min-h-[320px] w-[28vh] min-w-[156px] max-w-[300px]">
+              <div className="h-full w-full" style={patternStyle("Tie-dye", "hero-trama-scf")} />
+            </MonogramWindow>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
