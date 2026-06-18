@@ -1,7 +1,6 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { LockSimple } from "@phosphor-icons/react";
 import { Button } from "./ui/Button";
-import { Magnetic } from "./ui/Magnetic";
 import { Eyebrow } from "./ui/Eyebrow";
 import { LogoMark } from "./ui/LogoMark";
 import { MonogramWindow } from "./ui/MonogramWindow";
@@ -69,11 +68,9 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
-            <Magnetic>
-              <Button href="#acervo" variant="indigo">
-                Ver o acervo
-              </Button>
-            </Magnetic>
+            <Button href="#acervo" variant="indigo">
+              Ver o acervo
+            </Button>
             <Button href={CATALOGO_URL} variant="ghost" external>
               <LockSimple size={16} weight="bold" aria-hidden="true" />
               Área do Cliente

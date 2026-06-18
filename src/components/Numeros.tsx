@@ -1,5 +1,4 @@
 import { Reveal } from "./ui/Reveal";
-import { Marquee } from "./ui/Marquee";
 
 interface Stat {
   num: string;
@@ -18,25 +17,30 @@ const stats: Stat[] = [
 export function Numeros() {
   return (
     <section className="border-y border-[var(--color-line)] bg-bone-2 py-14 md:py-16">
-      <Reveal>
-        <Marquee durationSec={78}>
-          {stats.map((s) => (
-            <div key={s.label} className="flex shrink-0 items-baseline gap-3.5 px-12">
-              <span className="font-display text-[clamp(34px,4vw,54px)] font-normal leading-none tracking-[-0.02em] text-ink">
-                {s.num}
-                {s.unit && (
-                  <span className="ml-1.5 text-[clamp(15px,1.6vw,21px)] text-[var(--color-indigo)]">
-                    {s.unit}
-                  </span>
-                )}
-              </span>
-              <span className="max-w-[18ch] font-mono text-[11px] uppercase leading-snug tracking-[0.14em] text-ink-2">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </Marquee>
-      </Reveal>
+      <div className="container-scf grid grid-cols-2 gap-y-10 sm:grid-cols-4">
+        {stats.map((s, i) => (
+          <Reveal
+            key={s.label}
+            delay={i * 0.06}
+            className={
+              "px-1 sm:px-7 " +
+              (i !== 0 ? "sm:border-l sm:border-[var(--color-line)]" : "")
+            }
+          >
+            <p className="font-display text-[clamp(34px,4vw,56px)] font-normal leading-none tracking-[-0.02em] text-ink">
+              {s.num}
+              {s.unit && (
+                <span className="ml-1.5 align-baseline text-[clamp(15px,1.6vw,21px)] text-[var(--color-indigo)]">
+                  {s.unit}
+                </span>
+              )}
+            </p>
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-2">
+              {s.label}
+            </p>
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }
