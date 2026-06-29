@@ -8,16 +8,14 @@ interface Stat {
 
 // Fatos concretos a confirmar entram entre colchetes (brief §6).
 const stats: Stat[] = [
-  { num: "[2.400]", unit: "dpi", label: "Resolução de impressão" },
   { num: "[00]", unit: "anos", label: "No mercado têxtil" },
-  { num: "[90]", unit: "% menos água", label: "Que o processo convencional" },
-  { num: "[48]", unit: "h", label: "Prazo médio de amostra" },
+  { num: "[2.400]", unit: "dpi", label: "Resolução de impressão" },
 ];
 
 export function Numeros() {
   return (
     <section className="border-y border-[var(--color-line)] bg-bone-2 py-14 md:py-16">
-      <div className="container-scf grid grid-cols-2 gap-y-10 sm:grid-cols-4">
+      <div className="container-scf grid grid-cols-2">
         {stats.map((s, i) => (
           <Reveal
             key={s.label}

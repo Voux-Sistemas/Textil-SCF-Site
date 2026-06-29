@@ -16,7 +16,6 @@ const links = [
   { label: "Serviços", href: "#servicos" },
   { label: "Processo", href: "#processo" },
   { label: "A Casa", href: "#a-casa" },
-  { label: "Sustentabilidade", href: "#sustentabilidade" },
 ];
 
 export function Nav() {

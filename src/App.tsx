@@ -6,7 +6,6 @@ import { Servicos } from "./components/Servicos";
 import { Acervo } from "./components/Acervo";
 import { Processo } from "./components/Processo";
 import { Historia } from "./components/Historia";
-import { Sustentabilidade } from "./components/Sustentabilidade";
 import { Footer } from "./components/Footer";
 
 export default function App() {
@@ -21,7 +20,6 @@ export default function App() {
         <Acervo />
         <Processo />
         <Historia />
-        <Sustentabilidade />
       </main>
       <Footer />
     </div>
