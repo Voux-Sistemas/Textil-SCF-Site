@@ -1,78 +1,77 @@
-# Guia de Copy — Site Têxtil SCF
+# Guia de Copy — Têxtil SCF (perguntas factuais)
 
-> Objetivo: coletar do cliente **(A) como ele quer soar** e **(B) os fatos reais**
-> da empresa, pra eu (copywriter) escrever a copy de cada seção.
->
-> Como usar: a **Parte A** define a voz (decisão dele). A **Parte B** alimenta o
-> texto de cada seção. O que ele não souber responder, eu escrevo um rascunho e
-> ele ajusta — mas **fatos (números, datas, nomes) precisam vir dele; nada se
-> inventa.** (Direção visual e imagens estão no `BRIEFING-CLIENTE.md`.)
+> Como funciona: o **tom já está definido** (presumido a partir do design). O
+> cliente costuma travar em pergunta abstrata, então dele eu preciso só de
+> **fatos** — datas, números, nomes, o que a empresa faz. As perguntas abaixo
+> são todas objetivas. O que ele não souber, eu escrevo e ele só aprova.
 
 ---
 
-## PARTE A — A voz (como a marca quer soar)
+## Tom já presumido (cliente só confirma se algo destoar)
 
-1. Descreva a marca em **3 a 5 adjetivos** (ex.: séria, técnica, tradicional, confiável, acolhedora).
-2. E o que ela **NÃO** pode soar? (ex.: nada de "descolado/startup", nada de exagero publicitário)
-3. Como a empresa fala de si: **"nós"**, **"a Casa"**, **"a Têxtil SCF"**, ou impessoal?
-4. Registro: mais **técnico e preciso** (cor, processo, números) ou mais **emocional e narrativo** (história, paixão por cor)? Ou um equilíbrio — qual pesa mais?
-5. Tratamento: **"você/vocês"** (mais próximo) ou tom **mais formal/institucional**?
-6. Ritmo do texto: **frases curtas e diretas** ou **mais elaboradas/editoriais**?
-7. Tem alguma **marca/empresa cuja comunicação ele admira**? (serve de referência de tom)
-8. **Palavras e expressões** que a marca gosta de usar (jargão do ofício que passa autoridade) — e palavras que ele **não quer ver** no site.
-9. Ao terminar de ler o site, o que o cliente quer que a pessoa **sinta/pense**? (ex.: "essa é a casa mais séria em cor", "posso confiar o prazo")
-10. Existe uma **frase/promessa central** da marca (slogan)? Ou quer que eu proponha opções?
-11. Idioma: **só português**, ou **português + inglês** (se atende exportação/marcas internacionais)?
+Vou escrever como uma **casa têxtil séria, tradicional e técnica** — institucional,
+premium, em **português**, falando como **"a Casa" / "nós"**, frases enxutas e
+diretas, com autoridade em cor e processo. Sem ar de "startup", sem exagero
+publicitário.
+
+> Pergunta única de validação: *"Tem algo nesse tom que não combina com vocês?"*
+> Se não, seguimos. (Manifesto, slogan, headlines e "personalidade" — **eu monto**;
+> o cliente não precisa decidir isso.)
 
 ---
 
-## PARTE B — O conteúdo real (seção por seção)
+## Perguntas factuais (é isso que você pergunta pra ele)
 
-> Para cada item, o que importa é o **fato verdadeiro**. Pode ser em tópicos
-> soltos — eu transformo em texto.
+### A empresa
+1. Nome completo (razão social) e o nome que usam no dia a dia?
+2. Em que **ano** a empresa foi fundada?
+3. Em qual **cidade/estado** ficam?
+4. Quantas pessoas trabalham lá, mais ou menos? (opcional)
 
-### 1. Abertura (Hero)
-- Desde quando a empresa existe? → `[19XX]`
-- Se tivesse **uma frase** pra resumir o que a SCF entrega, qual seria? (eu refino/proponho variações)
+### História (vira a seção "A Casa" + a linha do tempo)
+5. Como a empresa **começou**? (quem fundou, por quê — pode ser 2-3 frases soltas)
+6. Em que ano passaram a imprimir **digital** (saíram do método convencional)?
+7. Têm **estúdio de criação** próprio? Desde quando?
+8. Têm **certificações**? Quais e de que ano? (ex.: ABVTEX)
+9. Já atendem **grandes marcas**? Desde quando? Pode citar alguma?
 
-### 2. Manifesto (a tese da marca)
-- No que a empresa **acredita** sobre estampa/cor? Qual a filosofia? (1–2 frases — ex.: "a estampa é a assinatura da marca no tecido")
+### O que fazem (Serviços)
+10. Confirmam estes 4: **estamparia digital, sublimação, estampa localizada, criação de estampa exclusiva**? Falta algum / tem outro nome?
+11. Quais **tecidos/bases** vocês estampam? (poliéster, viscose, algodão, malha…)
+12. Fazem **metragem corrida** e **peça localizada**? Tem **pedido mínimo**?
 
-### 3. Números (credibilidade)
-- Resolução real de impressão (DPI).
-- Anos de mercado. → `[00]`
-- % de economia de água/energia vs. convencional (se vocês medem).
-- Prazo médio de amostra.
-- Algum outro número de orgulho? (volume produzido, nº de estampas no acervo, nº de clientes, capacidade m/mês)
+### Processo
+13. Quais são as **etapas, na ordem**, de quando a arte chega até o tecido pronto? (me dá os nomes que vocês usam internamente)
 
-### 4. Serviços (o que fazem)
-- Confirmar as 4 frentes: **estamparia digital, sublimação, estampa localizada, desenvolvimento de estampa exclusiva**. Falta/sobra alguma?
-- Em uma linha cada: o que é e qual o **diferencial técnico** de cada uma (bases, acabamento, quando indicar).
+### Números reais (a faixa de credibilidade)
+14. **Resolução** de impressão (DPI)?
+15. **Prazo médio** de uma amostra? E de produção?
+16. Têm algum dado de **economia de água/energia** vs. o processo convencional? Qual?
+17. Quantas **estampas** tem o acervo, mais ou menos?
+18. **Capacidade** de produção (metros/mês, aprox.)? Algum outro número de orgulho?
 
-### 5. Processo ("do arquivo ao rolo")
-- As **5 etapas reais**, no vocabulário de vocês (hoje: Arte → Preparação → Impressão → Fixação → Controle de cor). Confere? O que acontece em cada uma?
+### Diferencial (eu uso pra escrever o manifesto e o "por que a SCF")
+19. **Por que um cliente escolhe vocês** e não o concorrente? (ex.: cor fiel, prazo, exclusividade, atendimento)
 
-### 6. A Casa / História
-- Como a empresa **começou** (ano, quem fundou, de onde veio).
-- **Marcos** com ano: primeira impressora digital, abertura do estúdio de criação, certificações, primeiras grandes marcas atendidas.
-- Por que **grandes marcas voltam** a comprar de vocês? (o que vocês fazem que o concorrente não faz)
-- Cidade/região. → `[cidade]`
+### Sustentabilidade (só o que for verdade)
+20. O que vocês **realmente** fazem? (tratam efluentes? tipo de tinta? imprimem sob demanda sem sobra? certificações ambientais?)
 
-### 7. Sustentabilidade
-- Práticas **reais** (só o que é verdade): tratamento/reúso de efluentes, tipo de tinta, impressão sob demanda, certificações ambientais.
+### Prova social
+21. Podemos mostrar **nomes/logos de clientes reais** (com autorização)? Quais?
+22. Algum cliente toparia um **depoimento curto** (frase + nome + cargo + marca)?
 
-### 8. Clientes / prova social
-- Podemos citar **clientes reais** (com autorização)? Quais?
-- Tem **depoimento real** de cliente? (frase + nome + cargo + marca)
+### Contato
+23. **WhatsApp, e-mail, endereço, redes sociais (@)** e horário de atendimento?
 
-### 9. Contato / fechamento
-- Uma frase de **fechamento/convite** (o que vocês querem que o cliente faça?).
-- Dados reais: WhatsApp, e-mail, endereço, redes sociais, horário de atendimento.
+### Catálogo (já decidido — só falta o dado)
+24. Qual a **URL do site de catálogo**? (pra ligar a Área do Cliente)
 
 ---
 
-### Resumo do que cada parte entrega
-- **Parte A** → o **tom** de toda a escrita (sem isso, a copy fica genérica).
-- **Parte B** → o **texto verídico** de cada seção e o preenchimento dos `[colchetes]`.
+## O que EU monto (cliente não precisa pensar nisso)
+- O **tom de voz** e a personalidade da escrita.
+- O **manifesto** / a "tese" da marca (derivo da pergunta 19).
+- O **slogan** e as **headlines** de cada seção.
+- A redação final de tudo — o cliente só **aprova e ajusta**.
 
-Com isso em mãos, eu escrevo a copy completa, no tom certo, e a gente ajusta junto.
+> Resumo: o cliente te dá **fatos** (perguntas 1-24); eu transformo em copy no tom certo.
