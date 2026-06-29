@@ -56,15 +56,14 @@ publicitário.
 ### Sustentabilidade (só o que for verdade)
 20. O que vocês **realmente** fazem? (tratam efluentes? tipo de tinta? imprimem sob demanda sem sobra? certificações ambientais?)
 
-### Prova social
-21. Podemos mostrar **nomes/logos de clientes reais** (com autorização)? Quais?
-22. Algum cliente toparia um **depoimento curto** (frase + nome + cargo + marca)?
-
 ### Contato
-23. **WhatsApp, e-mail, endereço, redes sociais (@)** e horário de atendimento?
+21. **WhatsApp, e-mail, endereço, redes sociais (@)** e horário de atendimento?
 
 ### Catálogo (já decidido — só falta o dado)
-24. Qual a **URL do site de catálogo**? (pra ligar a Área do Cliente)
+22. Qual a **URL do site de catálogo**? (pra ligar a Área do Cliente)
+
+> Obs.: a seção "Clientes / prova social" (logos + depoimento) foi **removida** do
+> site — o cliente não quer expor as marcas que atende. Não precisa perguntar.
 
 ---
 
@@ -74,4 +73,4 @@ publicitário.
 - O **slogan** e as **headlines** de cada seção.
 - A redação final de tudo — o cliente só **aprova e ajusta**.
 
-> Resumo: o cliente te dá **fatos** (perguntas 1-24); eu transformo em copy no tom certo.
+> Resumo: o cliente te dá **fatos** (perguntas 1-22); eu transformo em copy no tom certo.

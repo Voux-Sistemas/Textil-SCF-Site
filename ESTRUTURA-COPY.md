@@ -64,13 +64,7 @@ A Casa · Sustentabilidade) · **Área do Cliente** (discreto → catálogo).
 - **3 pontos** (título + 1 linha): _Água em ciclo · Tinta de base aquosa · Impressão sob demanda_
 → precisa: **práticas reais** (P18) + **número de água** (P11).
 
-### 9. Clientes — prova social
-- **Headline** _"Vestem as estampas da SCF."_
-- **Carrossel de logos** (hoje 8 marcas fictícias)
-- **Depoimento** (frase + _[Cliente], [cargo]_)
-→ precisa: **logos de clientes reais** (P19) + **depoimento real** (P20).
-
-### 10. Rodapé
+### 9. Rodapé
 Wordmark + frase + Área do Cliente + navegação + **contato** (WhatsApp · e-mail · endereço · social) + ©.
 → precisa: **dados de contato** (P21). Frase **eu escrevo**.
 
@@ -113,20 +107,19 @@ Wordmark + frase + Área do Cliente + navegação + **contato** (WhatsApp · e-m
 **Sustentabilidade**
 17. O que fazem **de fato** (efluentes, tipo de tinta, sob demanda, certificações)?
 
-**Prova social**
-18. Podem mostrar **logos de clientes reais** (com autorização)? Quais?
-19. Algum cliente topa um **depoimento curto** (frase + nome + cargo + marca)?
-
 **Contato e catálogo**
-20. WhatsApp, e-mail, endereço, redes sociais (@), horário?
-21. Qual a **URL do site de catálogo** (pra ligar a Área do Cliente)?
+18. WhatsApp, e-mail, endereço, redes sociais (@), horário?
+19. Qual a **URL do site de catálogo** (pra ligar a Área do Cliente)?
 
 **Validação única de tom**
-22. *"Tem algo no tom (casa séria, tradicional, técnica) que não combina com vocês?"*
+20. *"Tem algo no tom (casa séria, tradicional, técnica) que não combina com vocês?"*
+
+> Seção "Clientes / prova social" **removida** do site (o cliente não quer expor as
+> marcas que atende). Sem perguntas de logos/depoimento.
 
 ---
 
 ### O que EU entrego a partir disso
 Hero · Manifesto · descrições de Serviços · etapas do Processo · narrativa de "A Casa"
-+ linha do tempo · textos de Sustentabilidade · depoimento formatado · frases de rodapé —
++ linha do tempo · textos de Sustentabilidade · frases de rodapé —
 tudo no tom certo. O cliente dá os **fatos**; eu transformo em **copy** e a gente refina.
