@@ -29,6 +29,31 @@ export function Processo() {
           }
         />
 
+        {/* Imagens do processo: a máquina, a fixação e o detalhe da impressão */}
+        <Reveal delay={0.1} className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <img
+            src="/fabrica-impressao.png"
+            alt="Impressora têxtil digital imprimindo um tecido estampado"
+            loading="lazy"
+            decoding="async"
+            className="aspect-[16/9] w-full rounded-[var(--radius-card)] border border-white/10 object-cover md:col-span-2"
+          />
+          <img
+            src="/fabrica-fixacao.png"
+            alt="Fixação do tecido em calandra com vapor"
+            loading="lazy"
+            decoding="async"
+            className="aspect-[4/3] w-full rounded-[var(--radius-card)] border border-white/10 object-cover"
+          />
+          <img
+            src="/fabrica-detalhe.png"
+            alt="Detalhe da máquina de impressão e da tinta"
+            loading="lazy"
+            decoding="async"
+            className="aspect-[4/3] w-full rounded-[var(--radius-card)] border border-white/10 object-cover"
+          />
+        </Reveal>
+
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
           {etapas.map((e, i) => (
             <Reveal

@@ -1,11 +1,8 @@
 import { Reveal } from "./ui/Reveal";
 import { Chip } from "./ui/Chip";
-import { PrintPlate } from "./PrintPlate";
 import { timeline } from "../data/timeline";
-import { estampas } from "../data/estampas";
 
 const selos = ["[ABVTEX]", "Padrão Pantone", "Baixa metragem", "[Certificação]"];
-const placaCasa = estampas.find((e) => e.ref === "SCF-0429") ?? estampas[0];
 
 export function Historia() {
   return (
@@ -39,8 +36,14 @@ export function Historia() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1} className="mx-auto w-full max-w-[420px] lg:col-span-6 lg:max-w-none">
-            <PrintPlate estampa={placaCasa} />
+          <Reveal delay={0.1} className="lg:col-span-6">
+            <img
+              src="/fabrica-galpao.png"
+              alt="Interior da Têxtil SCF: rolos de tecido organizados em prateleiras"
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full rounded-[var(--radius-card)] border border-[var(--color-line)] object-cover"
+            />
           </Reveal>
         </div>
 
