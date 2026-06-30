@@ -5,9 +5,9 @@
    já construído pelo sócio. A "Área do Cliente" deste site institucional não
    tem login próprio: ela leva o cliente direto ao login desse catálogo.
 
-   >>> TROCAR pela URL real do site de catálogo quando estiver definida. <<<
+   URL definida: https://scftextil.com.br
    ========================================================================= */
-export const CATALOGO_URL = "https://catalogo.textilscf.com.br"; // TODO: URL real do catálogo
+export const CATALOGO_URL = "https://scftextil.com.br";
 
 /* Rótulo único para a ação "entrar no catálogo" - usado em nav, acervo e footer.
    Mantém uma só intenção/rótulo em toda a página. */
