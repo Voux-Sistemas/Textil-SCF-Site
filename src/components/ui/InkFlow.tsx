@@ -25,7 +25,7 @@ interface Edge {
   anim: string;
 }
 
-const PROFUNDIDADE = "38%"; // quanto a luz da borda penetra no tecido
+const PROFUNDIDADE = "22%"; // quanto a luz da borda penetra no tecido (LED: rasa)
 
 const edges: Edge[] = [
   {
@@ -37,7 +37,7 @@ const edges: Edge[] = [
       height: PROFUNDIDADE,
       background: periodic(90, ["#b13066", "#35509a", "#8e2f56", "#5d7ec4"]),
     },
-    mask: "linear-gradient(to bottom, #000 0%, transparent 100%)",
+    mask: "linear-gradient(to bottom, #000 0%, #000 28%, transparent 100%)",
     anim: "scf-edge-x 38s linear infinite",
   },
   {
@@ -49,7 +49,7 @@ const edges: Edge[] = [
       height: PROFUNDIDADE,
       background: periodic(90, ["#d4562c", "#e3a63b", "#d873a4", "#c8502e"]),
     },
-    mask: "linear-gradient(to top, #000 0%, transparent 100%)",
+    mask: "linear-gradient(to top, #000 0%, #000 28%, transparent 100%)",
     anim: "scf-edge-x 46s linear infinite reverse",
   },
   {
@@ -61,7 +61,7 @@ const edges: Edge[] = [
       width: PROFUNDIDADE,
       background: periodic(180, ["#d873a4", "#b13066", "#d4562c", "#8e2f56"]),
     },
-    mask: "linear-gradient(to right, #000 0%, transparent 100%)",
+    mask: "linear-gradient(to right, #000 0%, #000 28%, transparent 100%)",
     anim: "scf-edge-y 42s linear infinite",
   },
   {
@@ -73,7 +73,7 @@ const edges: Edge[] = [
       width: PROFUNDIDADE,
       background: periodic(180, ["#35509a", "#7b4fa6", "#5d7ec4", "#2c3e6b"]),
     },
-    mask: "linear-gradient(to left, #000 0%, transparent 100%)",
+    mask: "linear-gradient(to left, #000 0%, #000 28%, transparent 100%)",
     anim: "scf-edge-y 34s linear infinite reverse",
   },
 ];
@@ -94,7 +94,7 @@ export function InkFlow() {
           className="ink-edge"
           style={{
             ...e.style,
-            opacity: 0.62,
+            opacity: 0.88,
             WebkitMaskImage: e.mask,
             maskImage: e.mask,
             animation: e.anim,
