@@ -21,7 +21,7 @@ const disco = `conic-gradient(from 0deg, ${CICLO.join(", ")})`;
 
 /* Degradê borda -> centro: a máscara radial revela a cor no contorno
    (plena nas bordas/cantos) e a apaga gradualmente até o miolo branco. */
-const mascara = "radial-gradient(120% 120% at 50% 50%, transparent 22%, #000 88%)";
+const mascara = "radial-gradient(120% 120% at 50% 50%, transparent 12%, #000 90%)";
 
 export function InkFlow() {
   return (
@@ -35,7 +35,8 @@ export function InkFlow() {
       <div
         className="absolute inset-0"
         style={{
-          opacity: 0.97,
+          opacity: 1,
+          filter: "saturate(1.35)",
           WebkitMaskImage: mascara,
           maskImage: mascara,
         }}
