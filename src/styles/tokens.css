@@ -24,6 +24,14 @@
   /* Texto sobre fundo escuro (ink) */
   --color-bone-dim: #a9abb4;
 
+  /* Paleta de TINTAS (a cor que vive nas estampas / elementos de impressão).
+     SEM VERDE - veto do cliente. Não usar verde em nenhum elemento do site. */
+  --ink-vinho: #8e2f56;
+  --ink-coral: #c8502e;
+  --ink-ambar: #d9a441;
+  --ink-indigo-claro: #46609e;
+  --ink-noite: #1f2a4a;
+
   /* Tipografia: grotescas com personalidade + mono p/ a camada de catálogo.
      Ênfase em títulos é por PESO (Cabinet não tem itálico real). */
   --font-display: "Cabinet Grotesk", system-ui, sans-serif;
@@ -109,6 +117,31 @@
     animation-play-state: paused;
   }
 
+  /* "Ourela" (selvedge): fio de calibração de cor, como a barra de chips
+     impressa na borda do tecido. Abre o site (topo do header) e fecha (rodapé).
+     Chips com paradas duras (não é gradiente suave de proposito - é impressão). */
+  .selvedge {
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--ink-noite) 0 16%,
+      var(--color-indigo) 16% 34%,
+      var(--ink-vinho) 34% 52%,
+      var(--ink-coral) 52% 66%,
+      var(--ink-ambar) 66% 80%,
+      var(--ink-indigo-claro) 80% 100%
+    );
+  }
+
+  /* Tinta viva (hero): manchas de pigmento que derivam devagar dentro do
+     monograma. Só transform anima (compositor); o quadro parado já é bonito,
+     então sob prefers-reduced-motion a regra global congela sem perda. */
+  .ink-blob {
+    position: absolute;
+    aspect-ratio: 1;
+    will-change: transform;
+  }
+
   /* Grão sutil de papel, fixo, sem custo de repaint no scroll */
   .grain::after {
     content: "";
@@ -127,6 +160,26 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Deriva das tintas do hero: dois trajetos lentos, sentidos opostos */
+@keyframes scf-ink-a {
+  0%,
+  100% {
+    transform: translate3d(-4%, -3%, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(6%, 8%, 0) scale(1.16) rotate(9deg);
+  }
+}
+@keyframes scf-ink-b {
+  0%,
+  100% {
+    transform: translate3d(5%, 4%, 0) scale(1.08) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-7%, -6%, 0) scale(0.94) rotate(-11deg);
   }
 }
 

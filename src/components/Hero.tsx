@@ -4,7 +4,7 @@ import { Button } from "./ui/Button";
 import { Eyebrow } from "./ui/Eyebrow";
 import { LogoMark } from "./ui/LogoMark";
 import { MonogramWindow } from "./ui/MonogramWindow";
-import { patternStyle } from "../lib/patterns";
+import { InkFlow } from "./ui/InkFlow";
 import { CATALOGO_URL } from "../data/site";
 
 export function Hero() {
@@ -88,7 +88,7 @@ export function Hero() {
             transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
             <MonogramWindow className="h-[58vh] max-h-[620px] min-h-[320px] w-[28vh] min-w-[156px] max-w-[300px]">
-              <div className="h-full w-full" style={patternStyle("Tie-dye", "hero-trama-scf")} />
+              <InkFlow />
             </MonogramWindow>
           </motion.div>
         </div>

@@ -23,6 +23,12 @@ e elemento de arquitetura).
 - **Tom:** casa têxtil SÉRIA, tradicional, premium. **NÃO** "tech/startup".
 - **Paleta:** neutros cool (zinc) + acento **índigo** `#2c3e6b`. **Nunca** fundo
   creme quente + serifa de alto contraste + brass — é o "cara de IA" que o cliente baniu.
+- **VERDE É BANIDO** (veto do dono). Nada verde em lugar nenhum, nem nos padrões
+  gerados (`src/lib/patterns.ts` - matiz ~65..180 proibida) nem em acentos.
+- **Sistema de tinta** (a cor "de estampa" do site): tokens `--ink-*` em tokens.css
+  (índigo, vinho, coral, âmbar). Vive em 3 lugares SÓ: InkFlow no monograma do
+  hero, ourela `.selvedge` no topo (Nav) e no rodapé. Não multiplicar - a
+  moldura continua sóbria.
 - **Fontes:** Cabinet Grotesk (display) + Switzer (corpo) + Space Mono (técnico).
   Ênfase em título = **peso**, não itálico (a display não tem itálico real).
 - **Raio único ~4px.** Sem pílulas; sem sharp-total ("jornalzão").

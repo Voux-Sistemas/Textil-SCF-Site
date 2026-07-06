@@ -40,6 +40,9 @@ export function Nav() {
             : "border-b border-transparent")
         }
       >
+        {/* Ourela: fio de calibração de cor, como a barra impressa na borda
+            do tecido. Abre o site; o par dele fecha o rodapé. */}
+        <div aria-hidden="true" className="selvedge" />
         <nav
           className={
             "container-scf flex items-center justify-between transition-all duration-300 " +

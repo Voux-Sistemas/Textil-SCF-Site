@@ -20,6 +20,8 @@ export function Footer() {
 
   return (
     <footer className="bg-[var(--color-ink)]">
+      {/* Ourela: o par do fio de cor do topo - abre no header, fecha aqui */}
+      <div aria-hidden="true" className="selvedge" />
       <div className="container-scf py-16 md:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Marca + Área do Cliente */}

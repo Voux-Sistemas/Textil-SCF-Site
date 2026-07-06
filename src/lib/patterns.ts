@@ -11,6 +11,10 @@ import type { Familia } from "../data/estampas";
    Direção de cor: fundos PROFUNDOS e saturados (não lavados) - sobre a moldura
    cool-neutra, a placa é o ponto de cor explosiva. Lavado = cara de IA.
 
+   VERDE É BANIDO (veto do dono da empresa). Nenhuma faixa de matiz pode cair
+   em ~65..180. As famílias usam índigo, violeta, vinho, coral e âmbar. Ao
+   mexer nos ranges, conferir min/max do jitter + offsets de cada camada.
+
    >>> PONTO DE TROCA: quando houver foto real, o PrintPlate usa <img src> e
    este gerador deixa de ser chamado. Ver PrintPlate.tsx. <<<
    ========================================================================= */
@@ -31,26 +35,27 @@ export function patternStyle(familia: Familia, ref: string): CSSProperties {
   const jitter = (base: number, range: number) => base + (s - 0.5) * range;
 
   switch (familia) {
-    /* Folhagem densa: base verde profunda + folhas claras + uma flor de contraste */
+    /* Floral noturno: base vinho profunda + blooms rosados + flor âmbar de
+       contraste (botânica sem verde - veto do cliente) */
     case "Botânica": {
-      const h = wrap(jitter(140, 30)); // verde
+      const h = wrap(jitter(342, 26)); // vinho / rosa profundo
       return {
-        backgroundColor: `hsl(${h} 44% 24%)`,
+        backgroundColor: `hsl(${h} 46% 22%)`,
         backgroundImage: [
-          `radial-gradient(38% 50% at ${22 + s * 14}% 28%, hsl(${wrap(h + 6)} 55% 52%) 0%, transparent 60%)`,
-          `radial-gradient(46% 42% at 80% ${62 + s * 10}%, hsl(${wrap(h - 18)} 60% 44%) 0%, transparent 58%)`,
-          `radial-gradient(30% 38% at 58% 80%, hsl(${wrap(h + 14)} 58% 58%) 0%, transparent 55%)`,
-          `radial-gradient(24% 30% at ${72 - s * 20}% 22%, hsl(${wrap(h + 150)} 72% 62%) 0%, transparent 50%)`,
+          `radial-gradient(38% 50% at ${22 + s * 14}% 28%, hsl(${wrap(h + 10)} 62% 56%) 0%, transparent 60%)`,
+          `radial-gradient(46% 42% at 80% ${62 + s * 10}%, hsl(${wrap(h - 16)} 58% 44%) 0%, transparent 58%)`,
+          `radial-gradient(30% 38% at 58% 80%, hsl(${wrap(h + 18)} 64% 60%) 0%, transparent 55%)`,
+          `radial-gradient(24% 30% at ${72 - s * 20}% 22%, hsl(${wrap(h + 50)} 78% 60%) 0%, transparent 50%)`,
         ].join(","),
       };
     }
 
     /* Malha geométrica: losangos saturados sobre base média */
     case "Geométrica": {
-      const h = wrap(jitter(28, 200));
+      const h = wrap(jitter(20, 70)); // rosa -> âmbar (nunca cruza o verde)
       const c1 = `hsl(${h} 66% 55%)`;
-      const c2 = `hsl(${wrap(h + 180)} 46% 24%)`;
-      const bg = `hsl(${wrap(h + 20)} 42% 40%)`;
+      const c2 = `hsl(${wrap(h + 215)} 46% 24%)`; // contraponto índigo/azul
+      const bg = `hsl(${wrap(h - 12)} 42% 40%)`; // -12: teto do range não vira oliva
       return {
         backgroundColor: bg,
         backgroundImage: [
@@ -63,7 +68,7 @@ export function patternStyle(familia: Familia, ref: string): CSSProperties {
 
     /* Tie-dye: anéis concêntricos que se fundem, base profunda */
     case "Tie-dye": {
-      const h = wrap(jitter(215, 80)); // índigo -> coral conforme seed
+      const h = wrap(jitter(250, 60)); // índigo -> violeta (sem faixa teal/verde)
       return {
         backgroundColor: `hsl(${h} 52% 24%)`,
         backgroundImage: [
@@ -92,10 +97,10 @@ export function patternStyle(familia: Familia, ref: string): CSSProperties {
 
     /* Étnica: bandas kilim em zigue-zague sobre base profunda */
     case "Étnica": {
-      const h = wrap(jitter(8, 60)); // brick / mostarda
+      const h = wrap(jitter(5, 50)); // brick / terracota
       const a = `hsl(${h} 64% 48%)`;
-      const b = `hsl(${wrap(h + 200)} 46% 24%)`;
-      const c = `hsl(${wrap(h + 38)} 66% 58%)`;
+      const b = `hsl(${wrap(h + 230)} 46% 24%)`; // banda índigo profunda
+      const c = `hsl(${wrap(h + 28)} 66% 58%)`; // fio âmbar (teto < 60, sem verde)
       return {
         backgroundColor: `hsl(${wrap(h + 18)} 40% 32%)`,
         backgroundImage: [
@@ -109,13 +114,13 @@ export function patternStyle(familia: Familia, ref: string): CSSProperties {
 
     /* Abstrata: blooms de pigmento saturado (chave CMYK) sobre base profunda */
     case "Abstrata": {
-      const h = wrap(jitter(330, 360));
+      const h = wrap(jitter(320, 90)); // violeta -> magenta -> vinho
       return {
         backgroundColor: `hsl(${wrap(h + 40)} 32% 30%)`,
         backgroundImage: [
           `radial-gradient(40% 45% at ${25 + s * 20}% 35%, hsl(${h} 82% 60%) 0%, transparent 58%)`,
-          `radial-gradient(45% 50% at 78% 30%, hsl(${wrap(h + 150)} 80% 56%) 0%, transparent 56%)`,
-          `radial-gradient(50% 55% at 55% 80%, hsl(${wrap(h + 60)} 82% 62%) 0%, transparent 58%)`,
+          `radial-gradient(45% 50% at 78% 30%, hsl(${wrap(h + 55)} 80% 56%) 0%, transparent 56%)`,
+          `radial-gradient(50% 55% at 55% 80%, hsl(${wrap(h - 55)} 82% 62%) 0%, transparent 58%)`,
         ].join(","),
       };
     }
