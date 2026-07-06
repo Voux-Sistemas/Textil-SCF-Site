@@ -7,13 +7,14 @@ import { MonogramWindow } from "./ui/MonogramWindow";
 import { InkFlow } from "./ui/InkFlow";
 import { CATALOGO_URL } from "../data/site";
 
-/* Fotos da casa em crossfade lento atrás do hero (ref. aprovada pelo cliente:
-   santaconstancia.com.br). O ciclo em CSS está em tokens.css (.hero-slide);
-   a 1ª foto repete por baixo como fallback estático (reduced-motion / carga). */
+/* Estampas em crossfade lento atrás do hero (pedido do cliente). O ciclo CSS
+   está em tokens.css (.hero-slide, 2 slides x 9s); a 1ª repete por baixo como
+   fallback estático (reduced-motion / carga).
+   CONTRASTE: a estampa é escurecida (filter) + scrim em gradiente quase sólido
+   à esquerda - o texto e a marca nunca se misturam com o padrão. */
 const slides = [
-  { src: "/fabrica-galpao.png", alt: "" },
-  { src: "/fabrica-impressao.png", alt: "" },
-  { src: "/fabrica-fixacao.png", alt: "" },
+  { src: "/estampa-hero-1.jpg", alt: "" },
+  { src: "/estampa-hero-2.jpg", alt: "" },
 ];
 
 export function Hero() {
@@ -33,12 +34,13 @@ export function Hero() {
       id="topo"
       className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[var(--color-ink)] pb-20 pt-24"
     >
-      {/* Slideshow de fundo + scrim (mais denso à esquerda, onde está o texto) */}
+      {/* Slideshow de estampas + scrim (quase sólido à esquerda, onde está o
+          texto; abre à direita, onde a estampa aparece de verdade) */}
       <div aria-hidden="true" className="absolute inset-0">
         <img
           src={slides[0].src}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover brightness-[0.82]"
         />
         {slides.map((s, i) => (
           <img
@@ -47,11 +49,13 @@ export function Hero() {
             alt=""
             loading={i === 0 ? "eager" : "lazy"}
             decoding="async"
-            className="hero-slide absolute inset-0 h-full w-full object-cover"
+            className="hero-slide absolute inset-0 h-full w-full object-cover brightness-[0.82]"
             style={{ animationDelay: `${i * 9}s` }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)]/90 via-[var(--color-ink)]/72 to-[var(--color-ink)]/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)]/[0.96] via-[var(--color-ink)]/[0.84] to-[var(--color-ink)]/[0.42]" />
+        {/* Reforço vertical: base mais escura ancora os botões */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--color-ink)]/70 to-transparent" />
       </div>
 
       {/* Monograma fantasma: arquitetura ao fundo, sangrando pela direita */}
