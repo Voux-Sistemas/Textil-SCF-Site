@@ -25,7 +25,7 @@ interface Edge {
   anim: string;
 }
 
-const PROFUNDIDADE = "46%"; // quanto a luz da borda penetra no tecido
+const PROFUNDIDADE = "38%"; // quanto a luz da borda penetra no tecido
 
 const edges: Edge[] = [
   {
@@ -94,7 +94,7 @@ export function InkFlow() {
           className="ink-edge"
           style={{
             ...e.style,
-            opacity: 0.92,
+            opacity: 0.62,
             WebkitMaskImage: e.mask,
             maskImage: e.mask,
             animation: e.anim,
