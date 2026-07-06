@@ -32,7 +32,7 @@ export function Hero() {
   return (
     <section
       id="topo"
-      className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[var(--color-ink)] pb-20 pt-24"
+      className="relative flex items-center overflow-hidden bg-[var(--color-ink)] pb-16 pt-24 lg:min-h-[100dvh] lg:pb-20"
     >
       {/* Slideshow de estampas + scrim (quase sólido à esquerda, onde está o
           texto; abre à direita, onde a estampa aparece de verdade) */}
@@ -78,7 +78,7 @@ export function Hero() {
         <span className="absolute bottom-0 right-0 h-5 w-5 border-b border-r border-white/25" />
       </div>
 
-      <div className="container-scf relative grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+      <div className="container-scf relative grid w-full grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10">
         {/* Tipografia */}
         <motion.div
           className="lg:col-span-6"
@@ -127,7 +127,7 @@ export function Hero() {
             animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <MonogramWindow className="h-[40vh] min-h-[280px] w-[20vh] min-w-[140px] max-h-[620px] max-w-[300px] md:h-[58vh] md:min-h-[320px] md:w-[28vh] md:min-w-[156px]">
+            <MonogramWindow className="h-[32vh] min-h-[220px] w-[16vh] min-w-[112px] max-h-[560px] max-w-[280px] md:h-[58vh] md:min-h-[320px] md:w-[28vh] md:min-w-[156px]">
               <InkFlow />
             </MonogramWindow>
           </motion.div>
