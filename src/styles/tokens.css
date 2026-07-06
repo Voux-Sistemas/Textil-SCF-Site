@@ -141,15 +141,10 @@
     animation: scf-hero-slide 18s linear infinite;
   }
 
-  /* Tinta viva (hero): TECIDO TINGIDO. A janela do monograma mostra um pano
-     em dip-dye - um fluxo contínuo de tinta (índigo -> violeta -> magenta ->
-     coral -> âmbar, ciclo palíndromo sem emenda) subindo devagar pela trama,
-     o mesmo gesto do reveal do hero. Só transform anima; sob
-     prefers-reduced-motion congela sem perda. */
-  .ink-dye {
-    position: absolute;
-    will-change: transform;
-  }
+  /* Tinta viva (hero): campo BRANCO institucional + anel de cor girando no
+     perímetro (estilo RGB premium): conic-gradient rotacionando dentro de uma
+     máscara de moldura. Só transform anima; sob prefers-reduced-motion o anel
+     congela colorido, sem perda. */
 
   /* Grão sutil de papel, fixo, sem custo de repaint no scroll */
   .grain::after {
@@ -191,14 +186,14 @@
   }
 }
 
-/* Subida da tinta: camada 2x com gradiente periódico desliza meio período
-   e recomeça - loop contínuo, mesma lógica do marquee */
-@keyframes scf-dye {
+/* Giro do anel RGB: o disco cônico dá uma volta completa (o translate fica
+   nos keyframes para o estado congelado continuar centrado) */
+@keyframes scf-rgb {
   from {
-    transform: translateY(0);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   to {
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
