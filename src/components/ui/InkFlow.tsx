@@ -1,62 +1,80 @@
-/* Tinta viva: pigmentos têxteis sobre TECIDO CRU (base clara), derivando
-   devagar como tinta se espalhando na trama. É a "estampa-assinatura" vista
-   através do monograma no hero. A base clara dá contraste máximo contra o
-   fundo escuro estampado do hero (pedido do cliente, 2ª rodada).
+/* Tinta viva: luz de pigmento entrando pelas BORDAS do monograma, de fora
+   pra dentro - como a tinta penetra o tecido por capilaridade. O centro fica
+   claro (tecido cru), o contorno é onde a cor vive; e as cores CAMINHAM
+   lentamente ao longo da borda (faixa 2x com gradiente periódico + translate
+   contínuo, mesma lógica do marquee).
 
-   Paleta SEM VERDE (veto do dono): índigo, vinho, coral, âmbar, rosa.
-   Animação apenas em transform; congela sob prefers-reduced-motion pela
-   regra global, e a composição parada continua bonita. */
+   Paleta SEM VERDE (veto do dono): magenta, índigo, coral, âmbar, rosa,
+   violeta. Animação apenas em transform; congela sob prefers-reduced-motion
+   pela regra global e a moldura parada continua bonita. */
 
-interface Blob {
-  color: string;
-  size: string;
-  pos: React.CSSProperties;
-  anim: string;
-  opacity?: number;
+import type { CSSProperties } from "react";
+
+/* Gradiente periódico: sequência repetida 2x + retorno à 1ª cor, para o
+   translate de -50% emendar sem salto. */
+function periodic(deg: number, cores: string[]): string {
+  const seq = [...cores, ...cores, cores[0]];
+  const n = seq.length - 1;
+  const stops = seq.map((c, i) => `${c} ${((i / n) * 100).toFixed(2)}%`);
+  return `linear-gradient(${deg}deg, ${stops.join(", ")})`;
 }
 
-const blobs: Blob[] = [
+interface Edge {
+  style: CSSProperties;
+  mask: string; // direção do desvanecimento (borda -> centro)
+  anim: string;
+}
+
+const PROFUNDIDADE = "46%"; // quanto a luz da borda penetra no tecido
+
+const edges: Edge[] = [
   {
-    color: "#b13066", // vinho/magenta
-    size: "130%",
-    pos: { top: "-12%", left: "-30%" },
-    anim: "scf-ink-a 26s ease-in-out infinite",
-    opacity: 0.9,
+    // topo: magenta -> índigo -> vinho -> azul
+    style: {
+      top: 0,
+      left: 0,
+      width: "200%",
+      height: PROFUNDIDADE,
+      background: periodic(90, ["#b13066", "#35509a", "#8e2f56", "#5d7ec4"]),
+    },
+    mask: "linear-gradient(to bottom, #000 0%, transparent 100%)",
+    anim: "scf-edge-x 38s linear infinite",
   },
   {
-    color: "#35509a", // índigo
-    size: "115%",
-    pos: { top: "6%", right: "-34%" },
-    anim: "scf-ink-b 22s ease-in-out infinite",
-    opacity: 0.88,
+    // base: coral -> âmbar -> rosa -> coral profundo
+    style: {
+      bottom: 0,
+      left: 0,
+      width: "200%",
+      height: PROFUNDIDADE,
+      background: periodic(90, ["#d4562c", "#e3a63b", "#d873a4", "#c8502e"]),
+    },
+    mask: "linear-gradient(to top, #000 0%, transparent 100%)",
+    anim: "scf-edge-x 46s linear infinite reverse",
   },
   {
-    color: "#d4562c", // coral
-    size: "110%",
-    pos: { top: "30%", left: "-26%" },
-    anim: "scf-ink-b 30s ease-in-out -9s infinite",
-    opacity: 0.85,
+    // esquerda: rosa -> magenta -> coral -> vinho
+    style: {
+      left: 0,
+      top: 0,
+      height: "200%",
+      width: PROFUNDIDADE,
+      background: periodic(180, ["#d873a4", "#b13066", "#d4562c", "#8e2f56"]),
+    },
+    mask: "linear-gradient(to right, #000 0%, transparent 100%)",
+    anim: "scf-edge-y 42s linear infinite",
   },
   {
-    color: "#e3a63b", // âmbar
-    size: "100%",
-    pos: { top: "48%", right: "-28%" },
-    anim: "scf-ink-a 24s ease-in-out -6s infinite",
-    opacity: 0.85,
-  },
-  {
-    color: "#d873a4", // rosa
-    size: "105%",
-    pos: { bottom: "8%", left: "-30%" },
-    anim: "scf-ink-a 34s ease-in-out -15s infinite",
-    opacity: 0.8,
-  },
-  {
-    color: "#5d7ec4", // azul-claro
-    size: "120%",
-    pos: { bottom: "-14%", right: "-32%" },
-    anim: "scf-ink-b 27s ease-in-out -13s infinite",
-    opacity: 0.85,
+    // direita: índigo -> violeta -> azul -> índigo profundo
+    style: {
+      right: 0,
+      top: 0,
+      height: "200%",
+      width: PROFUNDIDADE,
+      background: periodic(180, ["#35509a", "#7b4fa6", "#5d7ec4", "#2c3e6b"]),
+    },
+    mask: "linear-gradient(to left, #000 0%, transparent 100%)",
+    anim: "scf-edge-y 34s linear infinite reverse",
   },
 ];
 
@@ -70,16 +88,16 @@ export function InkFlow() {
           "linear-gradient(178deg, #f7f7f9 0%, #eef0f4 46%, #f3edef 100%)",
       }}
     >
-      {blobs.map((b, i) => (
+      {edges.map((e, i) => (
         <span
           key={i}
-          className="ink-blob"
+          className="ink-edge"
           style={{
-            width: b.size,
-            ...b.pos,
-            opacity: b.opacity,
-            background: `radial-gradient(closest-side, ${b.color} 0%, transparent 70%)`,
-            animation: b.anim,
+            ...e.style,
+            opacity: 0.92,
+            WebkitMaskImage: e.mask,
+            maskImage: e.mask,
+            animation: e.anim,
           }}
         />
       ))}

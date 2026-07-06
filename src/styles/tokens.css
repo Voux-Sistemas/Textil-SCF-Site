@@ -141,12 +141,13 @@
     animation: scf-hero-slide 18s linear infinite;
   }
 
-  /* Tinta viva (hero): manchas de pigmento que derivam devagar dentro do
-     monograma. Só transform anima (compositor); o quadro parado já é bonito,
-     então sob prefers-reduced-motion a regra global congela sem perda. */
-  .ink-blob {
+  /* Tinta viva (hero): luz de pigmento entrando pelas BORDAS do monograma,
+     de fora pra dentro (como tinta penetrando o tecido por capilaridade).
+     Cada borda é uma faixa 2x que desliza devagar (a cor caminha pelo
+     contorno); a máscara desvanece rumo ao centro, que fica claro e limpo.
+     Só transform anima; sob prefers-reduced-motion congela sem perda. */
+  .ink-edge {
     position: absolute;
-    aspect-ratio: 1;
     will-change: transform;
   }
 
@@ -190,23 +191,22 @@
   }
 }
 
-/* Deriva das tintas do hero: dois trajetos lentos, sentidos opostos */
-@keyframes scf-ink-a {
-  0%,
-  100% {
-    transform: translate3d(-4%, -3%, 0) scale(1) rotate(0deg);
+/* Fluxo das bordas de tinta: a faixa (2x, gradiente periódico) desliza meio
+   período e recomeça - loop contínuo, mesma lógica do marquee */
+@keyframes scf-edge-x {
+  from {
+    transform: translateX(0);
   }
-  50% {
-    transform: translate3d(6%, 8%, 0) scale(1.16) rotate(9deg);
+  to {
+    transform: translateX(-50%);
   }
 }
-@keyframes scf-ink-b {
-  0%,
-  100% {
-    transform: translate3d(5%, 4%, 0) scale(1.08) rotate(0deg);
+@keyframes scf-edge-y {
+  from {
+    transform: translateY(0);
   }
-  50% {
-    transform: translate3d(-7%, -6%, 0) scale(0.94) rotate(-11deg);
+  to {
+    transform: translateY(-50%);
   }
 }
 
