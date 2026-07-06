@@ -9,15 +9,15 @@
    anima; sob prefers-reduced-motion o anel congela colorido. */
 
 const CICLO = [
-  "#3d5fc4", // índigo vivo
-  "#8b52d6", // violeta
-  "#e0407e", // magenta
-  "#f2643a", // coral
-  "#f5b83d", // âmbar
-  "#f2643a",
-  "#e0407e",
-  "#8b52d6",
-  "#3d5fc4", // fecha onde abriu: giro sem emenda
+  "#46609e", // índigo
+  "#7b5fae", // violeta suave
+  "#b8557e", // magenta suave
+  "#d4764f", // coral suave
+  "#dfb268", // âmbar suave
+  "#d4764f",
+  "#b8557e",
+  "#7b5fae",
+  "#46609e", // fecha onde abriu: giro sem emenda
 ];
 const disco = `conic-gradient(from 0deg, ${CICLO.join(", ")})`;
 
@@ -68,9 +68,9 @@ export function InkFlow() {
       }}
     >
       {/* Bloom: o brilho difuso do LED por baixo da fita */}
-      <Anel espessura={26} blur={14} opacidade={0.5} />
-      {/* A fita de cor nítida */}
-      <Anel espessura={10} opacidade={0.95} />
+      <Anel espessura={26} blur={14} opacidade={0.38} />
+      {/* A fita de cor, com leve fade nas bordas (blur curto) */}
+      <Anel espessura={10} blur={3} opacidade={0.78} />
     </div>
   );
 }
