@@ -133,6 +133,14 @@
     );
   }
 
+  /* Slideshow do hero: fotos da casa em crossfade lento (3 slides x 9s).
+     Cada slide entra com delay i*9s; o fallback estático fica por baixo,
+     então sob prefers-reduced-motion (animação desligada) sobra a 1ª foto. */
+  .hero-slide {
+    opacity: 0;
+    animation: scf-hero-slide 27s linear infinite;
+  }
+
   /* Tinta viva (hero): manchas de pigmento que derivam devagar dentro do
      monograma. Só transform anima (compositor); o quadro parado já é bonito,
      então sob prefers-reduced-motion a regra global congela sem perda. */
@@ -163,6 +171,25 @@
   }
 }
 
+/* Crossfade do slideshow do hero: visível 1/3 do ciclo, fusão nas bordas */
+@keyframes scf-hero-slide {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  33.3% {
+    opacity: 1;
+  }
+  40.3% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /* Deriva das tintas do hero: dois trajetos lentos, sentidos opostos */
 @keyframes scf-ink-a {
   0%,
@@ -183,9 +210,10 @@
   }
 }
 
-/* Quality floor: marquee não roda sob prefers-reduced-motion */
+/* Quality floor: marquee e slideshow não rodam sob prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .marquee-track,
+  .hero-slide {
     animation: none !important;
   }
 }

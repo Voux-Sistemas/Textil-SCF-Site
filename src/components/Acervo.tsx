@@ -6,7 +6,8 @@ import { Chip } from "./ui/Chip";
 import { Button } from "./ui/Button";
 import { Reveal } from "./ui/Reveal";
 import { PrintPlate } from "./PrintPlate";
-import { estampas, familias, type Familia } from "../data/estampas";
+import { PrintModal } from "./PrintModal";
+import { estampas, familias, type Estampa, type Familia } from "../data/estampas";
 import { CATALOGO_URL } from "../data/site";
 
 type Filtro = Familia | "Todas";
@@ -14,6 +15,7 @@ const filtros: Filtro[] = ["Todas", ...familias];
 
 export function Acervo() {
   const [filtro, setFiltro] = useState<Filtro>("Todas");
+  const [aberta, setAberta] = useState<Estampa | null>(null);
   const reduce = useReducedMotion();
 
   const visiveis =
@@ -56,7 +58,7 @@ export function Acervo() {
                 exit={reduce ? undefined : { opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >
-                <PrintPlate estampa={e} bloqueada />
+                <PrintPlate estampa={e} bloqueada onOpen={setAberta} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -73,6 +75,9 @@ export function Acervo() {
           </span>
         </Reveal>
       </div>
+
+      {/* Visualização maior (ficha técnica + aplicações) */}
+      <PrintModal estampa={aberta} onClose={() => setAberta(null)} />
     </section>
   );
 }

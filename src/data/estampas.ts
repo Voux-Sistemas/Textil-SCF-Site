@@ -143,3 +143,14 @@ export const familias: Familia[] = [
   "Étnica",
   "Abstrata",
 ];
+
+/* Aplicações sugeridas por família (segmentos, como catálogos têxteis fazem).
+   Placeholder editorial - confirmar/ajustar com o cliente junto da copy. */
+export const aplicacoes: Record<Familia, string[]> = {
+  Botânica: ["Vestidos", "Camisaria", "Moda resort"],
+  Geométrica: ["Camisaria", "Alfaiataria leve", "Acessórios"],
+  "Tie-dye": ["Moda praia", "Athleisure", "Beachwear"],
+  Animal: ["Vestidos", "Lenços", "Moda festa"],
+  Étnica: ["Moda resort", "Saias e conjuntos", "Decoração leve"],
+  Abstrata: ["Vestidos", "Moda festa", "Camisaria"],
+};

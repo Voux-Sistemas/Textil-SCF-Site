@@ -7,6 +7,15 @@ import { MonogramWindow } from "./ui/MonogramWindow";
 import { InkFlow } from "./ui/InkFlow";
 import { CATALOGO_URL } from "../data/site";
 
+/* Fotos da casa em crossfade lento atrás do hero (ref. aprovada pelo cliente:
+   santaconstancia.com.br). O ciclo em CSS está em tokens.css (.hero-slide);
+   a 1ª foto repete por baixo como fallback estático (reduced-motion / carga). */
+const slides = [
+  { src: "/fabrica-galpao.png", alt: "" },
+  { src: "/fabrica-impressao.png", alt: "" },
+  { src: "/fabrica-fixacao.png", alt: "" },
+];
+
 export function Hero() {
   const reduce = useReducedMotion();
 
@@ -22,20 +31,44 @@ export function Hero() {
   return (
     <section
       id="topo"
-      className="relative flex min-h-[100dvh] items-center overflow-hidden pb-20 pt-24"
+      className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[var(--color-ink)] pb-20 pt-24"
     >
+      {/* Slideshow de fundo + scrim (mais denso à esquerda, onde está o texto) */}
+      <div aria-hidden="true" className="absolute inset-0">
+        <img
+          src={slides[0].src}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {slides.map((s, i) => (
+          <img
+            key={s.src}
+            src={s.src}
+            alt=""
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            className="hero-slide absolute inset-0 h-full w-full object-cover"
+            style={{ animationDelay: `${i * 9}s` }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)]/90 via-[var(--color-ink)]/72 to-[var(--color-ink)]/50" />
+      </div>
+
       {/* Monograma fantasma: arquitetura ao fundo, sangrando pela direita */}
-      <LogoMark className="pointer-events-none absolute right-[-13vw] top-1/2 hidden h-[108vh] w-[53vh] -translate-y-1/2 opacity-[0.04] lg:block" />
+      <LogoMark
+        onDark
+        className="pointer-events-none absolute right-[-13vw] top-1/2 hidden h-[108vh] w-[53vh] -translate-y-1/2 opacity-[0.05] lg:block"
+      />
 
       {/* Moldura blueprint: cantos finos (atelier / planta técnica) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-[clamp(20px,5vw,80px)] bottom-12 top-28 hidden lg:block"
       >
-        <span className="absolute left-0 top-0 h-5 w-5 border-l border-t border-[var(--color-line)]" />
-        <span className="absolute right-0 top-0 h-5 w-5 border-r border-t border-[var(--color-line)]" />
-        <span className="absolute bottom-0 left-0 h-5 w-5 border-b border-l border-[var(--color-line)]" />
-        <span className="absolute bottom-0 right-0 h-5 w-5 border-b border-r border-[var(--color-line)]" />
+        <span className="absolute left-0 top-0 h-5 w-5 border-l border-t border-white/25" />
+        <span className="absolute right-0 top-0 h-5 w-5 border-r border-t border-white/25" />
+        <span className="absolute bottom-0 left-0 h-5 w-5 border-b border-l border-white/25" />
+        <span className="absolute bottom-0 right-0 h-5 w-5 border-b border-r border-white/25" />
       </div>
 
       <div className="container-scf relative grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
@@ -47,10 +80,10 @@ export function Hero() {
           animate="show"
         >
           <motion.div variants={item} className="mb-7">
-            <Eyebrow>Estamparia digital têxtil · desde [19XX]</Eyebrow>
+            <Eyebrow onDark>Estamparia digital têxtil · desde [19XX]</Eyebrow>
           </motion.div>
 
-          <h1 className="font-display text-[clamp(46px,7.2vw,98px)] font-light leading-[0.95] tracking-[-0.03em] text-ink">
+          <h1 className="font-display text-[clamp(46px,7.2vw,98px)] font-light leading-[0.95] tracking-[-0.03em] text-bone">
             <motion.span variants={item} className="block">
               A cor que o tecido
             </motion.span>
@@ -61,7 +94,7 @@ export function Hero() {
 
           <motion.p
             variants={item}
-            className="mt-7 max-w-[46ch] text-[19px] leading-[1.55] text-ink-2"
+            className="mt-7 max-w-[46ch] text-[19px] leading-[1.55] text-bone-dim"
           >
             Estamparia digital de alta definição para marcas que tratam a
             estampa como identidade. Da arte à fixação.
@@ -71,7 +104,7 @@ export function Hero() {
             <Button href="#acervo" variant="indigo">
               Ver o acervo
             </Button>
-            <Button href={CATALOGO_URL} variant="ghost" external>
+            <Button href={CATALOGO_URL} variant="ghostDark" external>
               <LockSimple size={16} weight="bold" aria-hidden="true" />
               Área do Cliente
             </Button>

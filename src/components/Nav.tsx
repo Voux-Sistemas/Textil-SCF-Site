@@ -49,13 +49,25 @@ export function Nav() {
             (scrolled ? "h-[62px]" : "h-[78px]")
           }
         >
-          {/* Wordmark (+ marca SCF quando LOGO_SRC estiver definido) */}
+          {/* Wordmark (+ marca SCF quando LOGO_SRC estiver definido).
+              Sem scroll a nav flutua sobre o hero escuro -> texto osso;
+              ao rolar o fundo vira bone -> texto tinta. */}
           <a href="#topo" className="flex items-baseline gap-2.5">
-            <LogoMark className="h-9 w-[18px] self-center" />
-            <span className="font-display text-[22px] font-medium tracking-[-0.01em] text-ink">
+            <LogoMark onDark={!scrolled} className="h-9 w-[18px] self-center" />
+            <span
+              className={
+                "font-display text-[22px] font-medium tracking-[-0.01em] transition-colors duration-300 " +
+                (scrolled ? "text-ink" : "text-bone")
+              }
+            >
               TÊXTIL SCF
             </span>
-            <span className="hidden font-mono text-[9.5px] uppercase tracking-[0.22em] text-ink-2 sm:inline">
+            <span
+              className={
+                "hidden font-mono text-[9.5px] uppercase tracking-[0.22em] transition-colors duration-300 sm:inline " +
+                (scrolled ? "text-ink-2" : "text-bone-dim")
+              }
+            >
               Estamparia Digital
             </span>
           </a>
@@ -67,7 +79,12 @@ export function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="text-[14px] text-ink-2 transition-colors duration-200 hover:text-[var(--color-indigo)]"
+                className={
+                  "text-[14px] transition-colors duration-200 " +
+                  (scrolled
+                    ? "text-ink-2 hover:text-[var(--color-indigo)]"
+                    : "text-bone-dim hover:text-bone")
+                }
               >
                 {l.label}
               </a>
@@ -78,11 +95,11 @@ export function Nav() {
             {/* Indicador de idioma. PT ativo; EN entra quando houver copy EN
                 (ver memory: textil-scf-i18n-pending). Não é controle morto. */}
             <span className="hidden font-mono text-[11px] tracking-[0.1em] md:inline">
-              <span className="text-ink" aria-current="true">
+              <span className={scrolled ? "text-ink" : "text-bone"} aria-current="true">
                 PT
               </span>
-              <span className="px-1 text-[var(--color-line)]">/</span>
-              <span className="text-ink-2/55" title="Em breve">
+              <span className={"px-1 " + (scrolled ? "text-[var(--color-line)]" : "text-white/30")}>/</span>
+              <span className={scrolled ? "text-ink-2/55" : "text-bone-dim/60"} title="Em breve">
                 EN
               </span>
             </span>
@@ -91,7 +108,12 @@ export function Nav() {
               href={CATALOGO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-1.5 rounded-[var(--radius-input)] border border-[var(--color-line)] px-3.5 py-2 text-[12.5px] text-ink-2 transition-colors duration-200 hover:border-[var(--color-ink-2)] hover:text-ink sm:inline-flex"
+              className={
+                "hidden items-center gap-1.5 rounded-[var(--radius-input)] border px-3.5 py-2 text-[12.5px] transition-colors duration-200 sm:inline-flex " +
+                (scrolled
+                  ? "border-[var(--color-line)] text-ink-2 hover:border-[var(--color-ink-2)] hover:text-ink"
+                  : "border-white/25 text-bone-dim hover:border-white/60 hover:text-bone")
+              }
             >
               <LockSimple size={14} aria-hidden="true" />
               Área do Cliente
@@ -105,8 +127,8 @@ export function Nav() {
               onClick={() => setOpen(true)}
               className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
             >
-              <span className="h-px w-6 bg-ink" />
-              <span className="h-px w-6 bg-ink" />
+              <span className={"h-px w-6 transition-colors duration-300 " + (scrolled ? "bg-ink" : "bg-bone")} />
+              <span className={"h-px w-6 transition-colors duration-300 " + (scrolled ? "bg-ink" : "bg-bone")} />
             </button>
           </div>
         </nav>
