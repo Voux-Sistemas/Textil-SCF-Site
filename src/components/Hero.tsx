@@ -53,7 +53,10 @@ export function Hero() {
             style={{ animationDelay: `${i * 9}s` }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)]/[0.96] via-[var(--color-ink)]/[0.84] to-[var(--color-ink)]/[0.42]" />
+        {/* Mobile: o texto ocupa a largura toda -> véu uniforme e denso */}
+        <div className="absolute inset-0 bg-[var(--color-ink)]/85 md:hidden" />
+        {/* Desktop: denso à esquerda (texto), abre à direita (estampa) */}
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-[var(--color-ink)]/[0.96] via-[var(--color-ink)]/[0.84] to-[var(--color-ink)]/[0.42] md:block" />
         {/* Reforço vertical: base mais escura ancora os botões */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--color-ink)]/70 to-transparent" />
       </div>
@@ -124,7 +127,7 @@ export function Hero() {
             animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <MonogramWindow className="h-[58vh] max-h-[620px] min-h-[320px] w-[28vh] min-w-[156px] max-w-[300px]">
+            <MonogramWindow className="h-[40vh] min-h-[280px] w-[20vh] min-w-[140px] max-h-[620px] max-w-[300px] md:h-[58vh] md:min-h-[320px] md:w-[28vh] md:min-w-[156px]">
               <InkFlow />
             </MonogramWindow>
           </motion.div>

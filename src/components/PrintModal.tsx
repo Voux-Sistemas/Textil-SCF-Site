@@ -87,7 +87,7 @@ export function PrintModal({ estampa, onClose }: PrintModalProps) {
             </button>
 
             {/* Estampa grande (segue protegida: blur + marca d'água) */}
-            <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[520px]">
+            <div className="relative aspect-[4/3] overflow-hidden md:aspect-auto md:min-h-[520px]">
               {estampa.img ? (
                 <img
                   src={estampa.img}
