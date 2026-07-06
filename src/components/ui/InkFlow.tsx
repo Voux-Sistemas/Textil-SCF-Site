@@ -1,106 +1,60 @@
-/* Tinta viva: luz de pigmento entrando pelas BORDAS do monograma, de fora
-   pra dentro - como a tinta penetra o tecido por capilaridade. O centro fica
-   claro (tecido cru), o contorno é onde a cor vive; e as cores CAMINHAM
-   lentamente ao longo da borda (faixa 2x com gradiente periódico + translate
-   contínuo, mesma lógica do marquee).
+/* Tinta viva: TECIDO TINGIDO (dip-dye). A janela do monograma mostra um pano
+   mergulhado em tinta: um fluxo contínuo e saturado de cor subindo devagar
+   pela trama - o mesmo gesto do reveal do hero, que "tinge" de baixo pra cima.
+   Por cima, textura de trama (fios finos) e um brilho de cetim no alto.
 
-   Paleta SEM VERDE (veto do dono): magenta, índigo, coral, âmbar, rosa,
-   violeta. Animação apenas em transform; congela sob prefers-reduced-motion
-   pela regra global e a moldura parada continua bonita. */
+   O ciclo de cor é um PALÍNDROMO (índigo -> violeta -> magenta -> coral ->
+   âmbar -> coral -> magenta -> violeta -> índigo): cada transição é entre
+   matizes vizinhos, então o loop não tem emenda nem salto. SEM VERDE (veto
+   do dono). Só transform anima; congela sob prefers-reduced-motion. */
 
-import type { CSSProperties } from "react";
+const periodo = [
+  "#2c3e6b", // índigo (âncora da marca)
+  "#7b4fa6", // violeta
+  "#b13066", // magenta
+  "#d4562c", // coral
+  "#e3a63b", // âmbar
+  "#d4562c",
+  "#b13066",
+  "#7b4fa6",
+];
 
-/* Gradiente periódico: sequência repetida 2x + retorno à 1ª cor, para o
-   translate de -50% emendar sem salto. */
-function periodic(deg: number, cores: string[]): string {
-  const seq = [...cores, ...cores, cores[0]];
+/* Gradiente periódico 2x + retorno à 1ª cor: o translate de -50% emenda
+   perfeitamente (mesma lógica do marquee). */
+function tinta(): string {
+  const seq = [...periodo, ...periodo, periodo[0]];
   const n = seq.length - 1;
   const stops = seq.map((c, i) => `${c} ${((i / n) * 100).toFixed(2)}%`);
-  return `linear-gradient(${deg}deg, ${stops.join(", ")})`;
+  return `linear-gradient(180deg, ${stops.join(", ")})`;
 }
-
-interface Edge {
-  style: CSSProperties;
-  mask: string; // direção do desvanecimento (borda -> centro)
-  anim: string;
-}
-
-const PROFUNDIDADE = "8%"; // quase uma linha: fita de LED neon contornando
-
-const edges: Edge[] = [
-  {
-    // topo: magenta -> índigo -> vinho -> azul
-    style: {
-      top: 0,
-      left: 0,
-      width: "200%",
-      height: PROFUNDIDADE,
-      background: periodic(90, ["#b13066", "#35509a", "#8e2f56", "#5d7ec4"]),
-    },
-    mask: "linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%)",
-    anim: "scf-edge-x 38s linear infinite",
-  },
-  {
-    // base: coral -> âmbar -> rosa -> coral profundo
-    style: {
-      bottom: 0,
-      left: 0,
-      width: "200%",
-      height: PROFUNDIDADE,
-      background: periodic(90, ["#d4562c", "#e3a63b", "#d873a4", "#c8502e"]),
-    },
-    mask: "linear-gradient(to top, #000 0%, #000 40%, transparent 100%)",
-    anim: "scf-edge-x 46s linear infinite reverse",
-  },
-  {
-    // esquerda: rosa -> magenta -> coral -> vinho
-    style: {
-      left: 0,
-      top: 0,
-      height: "200%",
-      width: PROFUNDIDADE,
-      background: periodic(180, ["#d873a4", "#b13066", "#d4562c", "#8e2f56"]),
-    },
-    mask: "linear-gradient(to right, #000 0%, #000 40%, transparent 100%)",
-    anim: "scf-edge-y 42s linear infinite",
-  },
-  {
-    // direita: índigo -> violeta -> azul -> índigo profundo
-    style: {
-      right: 0,
-      top: 0,
-      height: "200%",
-      width: PROFUNDIDADE,
-      background: periodic(180, ["#35509a", "#7b4fa6", "#5d7ec4", "#2c3e6b"]),
-    },
-    mask: "linear-gradient(to left, #000 0%, #000 40%, transparent 100%)",
-    anim: "scf-edge-y 34s linear infinite reverse",
-  },
-];
 
 export function InkFlow() {
   return (
-    <div
-      aria-hidden="true"
-      className="relative h-full w-full overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(178deg, #f7f7f9 0%, #eef0f4 46%, #f3edef 100%)",
-      }}
-    >
-      {edges.map((e, i) => (
-        <span
-          key={i}
-          className="ink-edge"
-          style={{
-            ...e.style,
-            opacity: 0.95,
-            WebkitMaskImage: e.mask,
-            maskImage: e.mask,
-            animation: e.anim,
-          }}
-        />
-      ))}
+    <div aria-hidden="true" className="relative h-full w-full overflow-hidden">
+      {/* O tingimento: camada 2x subindo em loop contínuo */}
+      <div
+        className="ink-dye inset-x-0 top-0 h-[200%]"
+        style={{ background: tinta(), animation: "scf-dye 44s linear infinite" }}
+      />
+
+      {/* A trama: fios verticais e horizontais, quase imperceptíveis */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 3px), " +
+            "repeating-linear-gradient(0deg, rgba(12,12,24,0.06) 0 1px, transparent 1px 3px)",
+        }}
+      />
+
+      {/* Cetim: um respiro de luz no alto, dá corpo de tecido nobre */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(130% 55% at 28% 10%, rgba(255,255,255,0.28) 0%, transparent 58%)",
+        }}
+      />
     </div>
   );
 }

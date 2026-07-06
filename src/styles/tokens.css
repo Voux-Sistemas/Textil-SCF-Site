@@ -141,12 +141,12 @@
     animation: scf-hero-slide 18s linear infinite;
   }
 
-  /* Tinta viva (hero): luz de pigmento entrando pelas BORDAS do monograma,
-     de fora pra dentro (como tinta penetrando o tecido por capilaridade).
-     Cada borda é uma faixa 2x que desliza devagar (a cor caminha pelo
-     contorno); a máscara desvanece rumo ao centro, que fica claro e limpo.
-     Só transform anima; sob prefers-reduced-motion congela sem perda. */
-  .ink-edge {
+  /* Tinta viva (hero): TECIDO TINGIDO. A janela do monograma mostra um pano
+     em dip-dye - um fluxo contínuo de tinta (índigo -> violeta -> magenta ->
+     coral -> âmbar, ciclo palíndromo sem emenda) subindo devagar pela trama,
+     o mesmo gesto do reveal do hero. Só transform anima; sob
+     prefers-reduced-motion congela sem perda. */
+  .ink-dye {
     position: absolute;
     will-change: transform;
   }
@@ -191,17 +191,9 @@
   }
 }
 
-/* Fluxo das bordas de tinta: a faixa (2x, gradiente periódico) desliza meio
-   período e recomeça - loop contínuo, mesma lógica do marquee */
-@keyframes scf-edge-x {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-@keyframes scf-edge-y {
+/* Subida da tinta: camada 2x com gradiente periódico desliza meio período
+   e recomeça - loop contínuo, mesma lógica do marquee */
+@keyframes scf-dye {
   from {
     transform: translateY(0);
   }
