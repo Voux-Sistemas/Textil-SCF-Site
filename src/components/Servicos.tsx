@@ -1,6 +1,5 @@
 import { Reveal } from "./ui/Reveal";
 import { SectionHeader } from "./ui/SectionHeader";
-import { Marquee } from "./ui/Marquee";
 
 interface Servico {
   titulo: string;
@@ -30,6 +29,9 @@ const servicos: Servico[] = [
   },
 ];
 
+/* Lista editorial estática (fios finos, sem caixas): o carrossel de cards
+   quadrados foi rejeitado pelo cliente ("widgets quadrados passando").
+   Hierarquia por tipografia e hairlines, não por elevação. */
 export function Servicos() {
   return (
     <section id="servicos" className="section-pad">
@@ -41,24 +43,28 @@ export function Servicos() {
             </>
           }
         />
-      </div>
 
-      {/* Carrossel de serviços deslizando (sentido inverso), cards neutros */}
-      <Reveal className="mt-12">
-        <Marquee durationSec={66} reverse>
-          {servicos.map((s) => (
-            <article
-              key={s.titulo}
-              className="mr-5 flex min-h-[176px] w-[clamp(264px,80vw,340px)] shrink-0 flex-col justify-center rounded-[var(--radius-card)] border border-[var(--color-line)] bg-bone-2 p-7"
-            >
-              <h3 className="font-display text-[22px] font-medium leading-[1.05] text-ink">
-                {s.titulo}
-              </h3>
-              <p className="mt-2.5 text-[15px] leading-[1.55] text-ink-2">{s.texto}</p>
-            </article>
+        <div className="mt-9 border-b border-[var(--color-line)] md:mt-11">
+          {servicos.map((s, i) => (
+            <Reveal key={s.titulo} delay={i * 0.05}>
+              <div className="grid grid-cols-1 gap-y-1.5 border-t border-[var(--color-line)] py-6 md:grid-cols-12 md:items-baseline md:gap-x-8 md:py-7">
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-[11px] tracking-[0.12em] text-ink-2 md:col-span-1"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-[22px] font-medium leading-[1.1] text-ink md:col-span-4">
+                  {s.titulo}
+                </h3>
+                <p className="mt-1 text-[15.5px] leading-[1.55] text-ink-2 md:col-span-7 md:mt-0 md:max-w-[54ch]">
+                  {s.texto}
+                </p>
+              </div>
+            </Reveal>
           ))}
-        </Marquee>
-      </Reveal>
+        </div>
+      </div>
     </section>
   );
 }

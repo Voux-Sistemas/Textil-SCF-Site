@@ -100,9 +100,10 @@
     padding-inline: clamp(20px, 5vw, 80px);
   }
 
-  /* Ritmo vertical entre seções (meio-termo: respiro sem buraco) */
+  /* Ritmo vertical entre seções (compacto: cliente achou o site "cansativo"
+     com respiro grande demais - não voltar a inflar) */
   .section-pad {
-    padding-block: clamp(60px, 8vw, 116px);
+    padding-block: clamp(44px, 5.5vw, 80px);
   }
 
   /* Marquee horizontal (carrossel contínuo e fluido), com fade nas bordas */
