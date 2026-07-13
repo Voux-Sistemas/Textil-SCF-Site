@@ -5,6 +5,7 @@ import { Eyebrow } from "./ui/Eyebrow";
 import { LogoMark } from "./ui/LogoMark";
 import { MonogramWindow } from "./ui/MonogramWindow";
 import { InkFlow } from "./ui/InkFlow";
+import { FabricCanvas } from "./ui/FabricCanvas";
 import { CATALOGO_URL } from "../data/site";
 
 /* Estampas em crossfade lento atrás do hero (pedido do cliente). O ciclo CSS
@@ -53,6 +54,10 @@ export function Hero() {
             style={{ animationDelay: `${i * 9}s` }}
           />
         ))}
+        {/* Desktop: tecido interativo em WebGL cobre o slideshow e ondula a
+            estampa sob o cursor; em touch/reduced-motion/sem WebGL fica
+            transparente e as <img> acima seguem valendo */}
+        <FabricCanvas images={[slides[0].src, slides[1].src]} />
         {/* Mobile: o texto ocupa a largura toda -> véu uniforme e denso */}
         <div className="absolute inset-0 bg-[var(--color-ink)]/85 md:hidden" />
         {/* Desktop: denso à esquerda (texto), abre à direita (estampa) */}
