@@ -38,19 +38,19 @@ void main() {
   vec2 p = uv - uMouse;
   p.x *= uRes.x / uRes.y;
   float d = length(p);
-  float infl = exp(-d * 2.4);
+  float infl = exp(-d * 1.9);
 
-  /* Onda radial saindo do cursor (o "toque" no pano) */
-  float phase = d * 17.0 - uTime * 4.2;
+  /* Onda radial saindo do cursor (o "toque" no pano): larga e lenta */
+  float phase = d * 10.0 - uTime * 2.2;
   float ripple = sin(phase);
 
   /* Ondulação larga do pano inteiro enquanto o mouse está sobre o hero */
-  float swellX = sin(uv.y * 9.0 + uTime * 1.4);
-  float swellY = sin(uv.x * 7.0 - uTime * 1.1);
+  float swellX = sin(uv.y * 5.5 + uTime * 0.65);
+  float swellY = sin(uv.x * 4.5 - uTime * 0.5);
 
-  vec2 disp = normalize(p + 1e-4) * ripple * infl * uAmp * 0.011;
-  disp += vec2(swellX, swellY) * uAmp * (0.25 + 0.75 * infl) * 0.006;
-  disp -= p * infl * uAmp * 0.02; /* bojo: o tecido "sobe" sob o cursor */
+  vec2 disp = normalize(p + 1e-4) * ripple * infl * uAmp * 0.009;
+  disp += vec2(swellX, swellY) * uAmp * (0.3 + 0.7 * infl) * 0.005;
+  disp -= p * infl * uAmp * 0.015; /* bojo: o tecido "sobe" sob o cursor */
 
   vec2 uvD = uv + disp;
   vec3 c0 = texture2D(uT0, cover(uvD, uImg0)).rgb;
@@ -62,7 +62,7 @@ void main() {
   vec3 col = mix(c0, c1, fade);
 
   /* Dobras iluminadas: derivada da onda vira luz/sombra (o 3D do pano) */
-  float shade = cos(phase) * infl * uAmp * 0.17 + swellX * uAmp * 0.035;
+  float shade = cos(phase) * infl * uAmp * 0.12 + swellX * uAmp * 0.03;
   col *= (1.0 + shade) * 0.82; /* 0.82 = mesmo brightness dos <img> */
 
   gl_FragColor = vec4(col, 1.0);
@@ -100,10 +100,7 @@ export function FabricCanvas({ images }: FabricCanvasProps) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-    const gl = canvas.getContext("webgl", {
-      antialias: false,
-      powerPreference: "low-power",
-    });
+    const gl = canvas.getContext("webgl", { antialias: false });
     if (!gl) return;
 
     const vs = compile(gl, gl.VERTEX_SHADER, VERT);
@@ -147,11 +144,17 @@ export function FabricCanvas({ images }: FabricCanvasProps) {
     let amp = 0;
     let ampTarget = 0;
 
+    /* Rect cacheado: nada de getBoundingClientRect por evento de mouse */
+    let rect = canvas.getBoundingClientRect();
+    const updateRect = () => {
+      rect = canvas.getBoundingClientRect();
+    };
+    window.addEventListener("scroll", updateRect, { passive: true });
+
     const section = canvas.closest("section");
     const onMove = (e: MouseEvent) => {
-      const r = canvas.getBoundingClientRect();
-      mouse.tx = (e.clientX - r.left) / r.width;
-      mouse.ty = 1 - (e.clientY - r.top) / r.height;
+      mouse.tx = (e.clientX - rect.left) / rect.width;
+      mouse.ty = 1 - (e.clientY - rect.top) / rect.height;
       ampTarget = 1;
     };
     const onLeave = () => {
@@ -161,7 +164,7 @@ export function FabricCanvas({ images }: FabricCanvasProps) {
     section?.addEventListener("mouseleave", onLeave);
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       const w = Math.round(canvas.clientWidth * dpr);
       const h = Math.round(canvas.clientHeight * dpr);
       if (w && h && (canvas.width !== w || canvas.height !== h)) {
@@ -169,6 +172,7 @@ export function FabricCanvas({ images }: FabricCanvasProps) {
         canvas.height = h;
         gl.viewport(0, 0, w, h);
       }
+      updateRect();
     };
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
@@ -200,12 +204,20 @@ export function FabricCanvas({ images }: FabricCanvasProps) {
       gl.uniform2f(uImg1, img1.naturalWidth, img1.naturalHeight);
       resize();
 
+      /* Suavização por TEMPO real (independe do framerate: queda de frame
+         não vira solavanco) - molas lentas vendem o peso do pano */
+      let last = performance.now();
       const frame = () => {
         raf = requestAnimationFrame(frame);
         if (!visible || document.hidden) return;
-        mouse.x += (mouse.tx - mouse.x) * 0.1;
-        mouse.y += (mouse.ty - mouse.y) * 0.1;
-        amp += (ampTarget - amp) * 0.05;
+        const now = performance.now();
+        const dt = Math.min((now - last) / 1000, 0.05);
+        last = now;
+        const kMouse = 1 - Math.exp(-dt * 3.2);
+        const kAmp = 1 - Math.exp(-dt * 1.6);
+        mouse.x += (mouse.tx - mouse.x) * kMouse;
+        mouse.y += (mouse.ty - mouse.y) * kMouse;
+        amp += (ampTarget - amp) * kAmp;
         gl.uniform2f(uRes, canvas.width, canvas.height);
         gl.uniform2f(uMouse, mouse.x, mouse.y);
         gl.uniform1f(uAmp, amp);
@@ -222,6 +234,7 @@ export function FabricCanvas({ images }: FabricCanvasProps) {
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
+      window.removeEventListener("scroll", updateRect);
       section?.removeEventListener("mousemove", onMove);
       section?.removeEventListener("mouseleave", onLeave);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
