@@ -1,0 +1,23 @@
+# Ficha do projeto na Central VOUX (catálogo). O sync do GitHub lê este arquivo.
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: textil-scf-site
+  title: "Site Têxtil SCF"
+  tags: [react, vite, railway]
+  annotations:
+    github.com/project-slug: Voux-Sistemas/Textil-SCF-Site
+    voux.com.br/cliente: textil-scf
+    voux.com.br/responsavel: empresa
+    voux.com.br/tipo: site
+    railway.com/project-id: "fc8d3e9d-d65a-403e-bea0-530477394b76"
+    railway.com/service-id: "2bfd2345-6159-4acd-a18b-0dec384cb601"
+    voux.com.br/dominio: scftextil.com.br
+  links:
+    - url: https://scftextil.com.br
+      title: Produção
+      type: producao
+spec:
+  type: website
+  lifecycle: production
+  owner: group:voux
