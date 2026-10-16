@@ -13,6 +13,11 @@ export const CATALOGO_URL = "https://catalogo.scftextil.com.br/";
    Mantém uma só intenção/rótulo em toda a página. */
 export const AREA_CLIENTE_LABEL = "Área do Cliente";
 
+/* WhatsApp da SCF: o único canal de contato do site (sem e-mail). Vem de
+   VITE_WHATSAPP_NUMERO, só dígitos e com o 55; o build falha sem ele
+   (vite.config.ts). Links e texto: src/lib/whatsapp.ts. */
+export const WHATSAPP_NUMERO = import.meta.env.VITE_WHATSAPP_NUMERO ?? "";
+
 /* Marca SCF. Vazio "" = mostra só o wordmark "TÊXTIL SCF" (sem quebrar nada).
    Quando a logo estiver salva em public/ (ideal: SVG transparente; ou PNG de
    fundo transparente, alta resolução), aponte aqui, ex.: "/logo-scf.svg".

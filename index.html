@@ -9,6 +9,11 @@
     />
     <title>Têxtil SCF - Estamparia Digital</title>
 
+    <!-- Acervo: a API da SCF (fetch com CORS, por isso o crossorigin) e as
+         fotos das estampas (img.scftextil.com.br, R2). -->
+    <link rel="preconnect" href="%VITE_API_URL%" crossorigin />
+    <link rel="preconnect" href="https://img.scftextil.com.br" />
+
     <!-- Fontes hospedadas (Fontshare + Google) com preconnect + display=swap.
          Display: Cabinet Grotesk · Corpo: Switzer · Técnica/catálogo: Space Mono.
          Em produção, considere self-host (.woff2 local) para LCP. -->
