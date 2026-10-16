@@ -92,11 +92,13 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/textil_scf/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 transition-colors hover:text-bone"
                 >
                   <InstagramLogo size={17} aria-hidden="true" />
-                  @textilscf
+                  @textil_scf
                 </a>
               </li>
             </ul>
