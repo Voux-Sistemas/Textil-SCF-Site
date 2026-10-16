@@ -4,12 +4,14 @@ kind: Component
 metadata:
   name: textil-scf-site
   title: "Site Têxtil SCF"
-  tags: [react, vite, railway]
+  tags: [react, vite, coolify]
   annotations:
     github.com/project-slug: Voux-Sistemas/Textil-SCF-Site
     voux.com.br/cliente: textil-scf
     voux.com.br/responsavel: empresa
     voux.com.br/tipo: site
+    # Produção no Coolify (scf-site) desde 16/10/2026. O Railway abaixo é só o
+    # site de reserva, sem deploy automático: sai na limpeza (S5), por volta de 30/10.
     railway.com/project-id: "fc8d3e9d-d65a-403e-bea0-530477394b76"
     railway.com/service-id: "2bfd2345-6159-4acd-a18b-0dec384cb601"
     voux.com.br/dominio: scftextil.com.br
