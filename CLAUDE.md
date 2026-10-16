@@ -11,8 +11,9 @@ NÃO é loja — posiciona a empresa. O catálogo completo (com preços) é um s
 - `npm install`, `cp .env.example .env.local` e depois `npm run dev` → http://localhost:5173
 - `npm run build` (produção, gera `dist/`). Sem `VITE_API_URL` e `VITE_WHATSAPP_NUMERO`
   o build PARA de propósito (`vite.config.ts`).
-- Deploy: **Coolify** (`scf-site`, Nixpacks estático), a cada push na `main`. Node 20+.
-  O Railway (`railway.json`, `serve`) sai depois da troca do domínio.
+- Deploy: **Coolify** (`scf-site`, Nixpacks SPA), a cada push na `main`. Node 20+.
+  No ar em `scftextil.com.br` desde 16/10/2026 (o `www` redireciona). O Railway ficou
+  de reserva, sem deploy automático, até a limpeza (S5).
 - **Forma de trabalhar:** mudança de código sempre numa branch nova + PR. Nada direto na `main`.
 
 ## Stack
@@ -61,6 +62,9 @@ e elemento de arquitetura).
 - `BRIEFING-CLIENTE.md` — questionário para coletar dados e fotos do cliente.
 
 ## Pendente
+- **S5, por volta de 30/10/2026:** limpeza do Railway. Desligar o serviço de reserva e
+  tirar `railway.json`, a dependência `serve`, o `npm start` e as anotações `railway`
+  do `catalog-info.yaml` (branch + PR).
 - Processo, resolução e aplicações saíram da ficha de cada estampa (são da Casa):
   proposta de levá-los para a seção Serviços, aguardando aprovação.
 - Preencher os `[colchetes]` com dados reais (ver briefing).

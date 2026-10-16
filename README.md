@@ -41,7 +41,7 @@ elas, o `npm run build` para com o motivo (`vite.config.ts`).
 | `npm run dev`     | Desenvolvimento, com hot reload                  |
 | `npm run build`   | Build de produção (gera a pasta `dist/`)         |
 | `npm run preview` | Pré-visualiza o build localmente                 |
-| `npm start`       | Serve o `dist/` (usado no deploy)                |
+| `npm start`       | Serve o `dist/` com o `serve` (só o Railway de reserva; sai na S5) |
 
 ---
 
@@ -90,6 +90,10 @@ só as rotas públicas: sem cookie e **nunca com preço**.
 
 **Coolify** (aplicação `scf-site`), a partir da `main`: Nixpacks como site estático.
 
+**No ar desde 16/10/2026** em `https://scftextil.com.br`. O `www` redireciona para o
+domínio sem `www`, e o HTTPS é do Let's Encrypt. O acervo mostra os destaques
+marcados no PDV (12 hoje) e lê a API em `https://api.scftextil.com.br`.
+
 | Campo | Valor |
 |---|---|
 | Install Command | `npm ci --include=dev` (o Vite é devDependency) |
@@ -99,4 +103,7 @@ só as rotas públicas: sem cookie e **nunca com preço**.
 
 - Mudou uma variável? **Deploy** novo (o valor entra no build; Restart não basta).
 - Mudança de código vai numa branch nova, com PR. O que entra na `main` vai ao ar.
-- O Railway (`railway.json`, `serve` e `npm start`) sai depois da troca do domínio.
+- **Railway:** o site antigo ficou lá de reserva, com o deploy automático desligado.
+  A limpeza (S5) é por volta de 30/10/2026: desligar o serviço e tirar daqui o
+  `railway.json`, a dependência `serve`, o `npm start` e as anotações `railway` do
+  `catalog-info.yaml`.
