@@ -11,6 +11,8 @@ interface ButtonProps {
   className?: string;
   /** abre em nova aba com rel seguro (links externos, ex.: catálogo) */
   external?: boolean;
+  /** só no <button> (ex.: enviando um formulário) */
+  disabled?: boolean;
 }
 
 /* Retângulo editorial de raio 4px (não-pílula). Micro-deslocamento de 1px no
@@ -46,6 +48,7 @@ export function Button({
   type = "button",
   className = "",
   external = false,
+  disabled = false,
 }: ButtonProps) {
   const cls = `${base} ${variants[variant]} ${className}`;
   if (href) {
@@ -61,7 +64,12 @@ export function Button({
     );
   }
   return (
-    <button type={type} onClick={onClick} className={cls}>
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`${cls} disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0`}
+    >
       {children}
     </button>
   );

@@ -1,12 +1,12 @@
 import {
   LockSimple,
   WhatsappLogo,
-  EnvelopeSimple,
   MapPin,
   InstagramLogo,
 } from "@phosphor-icons/react";
 import { LogoMark } from "./ui/LogoMark";
-import { CATALOGO_URL } from "../data/site";
+import { CATALOGO_URL, WHATSAPP_NUMERO } from "../data/site";
+import { linkWhatsApp, telefoneLegivel } from "../lib/whatsapp";
 
 const nav = [
   { label: "Acervo", href: "#acervo" },
@@ -72,22 +72,16 @@ export function Footer() {
               Contato
             </p>
             <ul className="mt-5 space-y-3 text-[15px] text-bone-dim">
+              {/* WhatsApp direto (sem gravar orçamento): o único canal da SCF */}
               <li>
                 <a
-                  href="https://wa.me/55[tel]"
+                  href={linkWhatsApp()}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 transition-colors hover:text-bone"
                 >
                   <WhatsappLogo size={17} aria-hidden="true" />
-                  WhatsApp [tel]
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:contato@textilscf.com.br"
-                  className="inline-flex items-center gap-2.5 transition-colors hover:text-bone"
-                >
-                  <EnvelopeSimple size={17} aria-hidden="true" />
-                  contato@textilscf.com.br
+                  WhatsApp {telefoneLegivel(WHATSAPP_NUMERO)}
                 </a>
               </li>
               <li>

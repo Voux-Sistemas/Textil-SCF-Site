@@ -1,18 +1,15 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { X, LockSimple, ArrowUpRight } from "@phosphor-icons/react";
-import { Button } from "./ui/Button";
-import { Chip } from "./ui/Chip";
-import { aplicacoes, type Estampa } from "../data/estampas";
-import { patternStyle } from "../lib/patterns";
-import { CATALOGO_URL } from "../data/site";
+import { X, LockSimple } from "@phosphor-icons/react";
+import { OrcamentoWhatsApp } from "./OrcamentoWhatsApp";
+import type { Estampa } from "../lib/api";
 
 /* Visualização maior da estampa (ref. santaconstancia.com.br: card -> página
-   de detalhe com ficha e aplicações). Aqui vira modal e MANTÉM a proteção:
-   a imagem segue desfocada + marca d'água; o nítido fica na Área do Cliente.
-
-   Quando houver fotos reais da estampa em roupas/looks, preencher
-   `estampa.img` (e futuramente um campo de looks) - o slot já está previsto. */
+   de detalhe com ficha). Aqui vira modal e MANTÉM a proteção: a foto segue
+   desfocada (a marca d'água já vem nela, da API); o nítido fica na Área do
+   Cliente. Na ficha só entra o que a estampa tem cadastrado no PDV.
+   Processo, resolução e aplicações são da Casa, não de cada estampa: ficam
+   fora daqui (proposta de levar para Serviços). */
 
 interface PrintModalProps {
   estampa: Estampa | null;
@@ -28,6 +25,21 @@ function Ficha({ label, value }: { label: string; value: string }) {
       <dd className="text-right font-mono text-[12.5px] text-ink">{value}</dd>
     </div>
   );
+}
+
+/* As linhas da ficha que existem para esta estampa, na ordem de leitura. */
+function linhasDaFicha(e: Estampa): [string, string][] {
+  const t = e.tecido;
+  const linhas: [string, string | null | undefined][] = [
+    ["Referência", e.codigo],
+    ["Categoria", e.categoria],
+    ["Coleção", e.colecao],
+    ["Cor", e.familia_cor],
+    ["Composição", t?.composicao],
+    ["Gramatura", t?.gramatura ? `${t.gramatura} g/m²` : null],
+    ["Largura", t?.largura ? `${t.largura.toLocaleString("pt-BR")} cm` : null],
+  ];
+  return linhas.filter((l): l is [string, string] => !!l[1]);
 }
 
 export function PrintModal({ estampa, onClose }: PrintModalProps) {
@@ -69,7 +81,7 @@ export function PrintModal({ estampa, onClose }: PrintModalProps) {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={`Estampa ${estampa.ref} - ${estampa.nome}`}
+            aria-label={`Estampa ${estampa.codigo} - ${estampa.nome}`}
             className="relative grid max-h-[92dvh] w-full max-w-[980px] grid-cols-1 overflow-y-auto rounded-t-[var(--radius-card)] bg-[var(--color-bone)] shadow-[0_40px_120px_-30px_rgba(27,28,32,0.7)] sm:rounded-[var(--radius-card)] md:grid-cols-2"
             initial={reduce ? false : { opacity: 0, y: 28, scale: 0.985 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -86,47 +98,15 @@ export function PrintModal({ estampa, onClose }: PrintModalProps) {
               <X size={16} weight="bold" aria-hidden="true" />
             </button>
 
-            {/* Estampa grande (segue protegida: blur + marca d'água) */}
-            <div className="relative aspect-[4/3] overflow-hidden md:aspect-auto md:min-h-[520px]">
-              {estampa.img ? (
-                <img
-                  src={estampa.img}
-                  alt={`Estampa ${estampa.ref} - ${estampa.nome}`}
-                  className="absolute inset-0 h-full w-full scale-[1.06] object-cover blur-[5px]"
-                />
-              ) : (
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 scale-[1.06] blur-[5px]"
-                  style={patternStyle(estampa.familia, estampa.ref)}
-                />
-              )}
-              {/* Marca d'água tipográfica */}
-              <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full">
-                <defs>
-                  <pattern
-                    id={`wm-modal-${estampa.ref}`}
-                    width="172"
-                    height="116"
-                    patternUnits="userSpaceOnUse"
-                    patternTransform="rotate(-24)"
-                  >
-                    <text
-                      x="6"
-                      y="64"
-                      fontFamily="'Space Mono', ui-monospace, monospace"
-                      fontSize="12.5"
-                      letterSpacing="1.5"
-                      className="fill-white/40"
-                    >
-                      TÊXTIL SCF
-                    </text>
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill={`url(#wm-modal-${estampa.ref})`} />
-              </svg>
+            {/* Estampa grande (segue protegida: desfocada + marca d'água da API) */}
+            <div className="relative aspect-[4/3] overflow-hidden bg-bone-2 md:aspect-auto md:min-h-[520px]">
+              <img
+                src={estampa.imagem_url ?? estampa.miniatura_url ?? ""}
+                alt={`Estampa ${estampa.codigo} - ${estampa.nome}`}
+                className="absolute inset-0 h-full w-full scale-[1.06] object-cover blur-[5px]"
+              />
               <span className="absolute left-3 top-3 inline-flex rounded-[3px] bg-[var(--color-bone)]/90 px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.1em] text-[var(--color-ink)] backdrop-blur-sm">
-                {estampa.ref}
+                Ref. {estampa.codigo}
               </span>
               <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-[3px] bg-[var(--color-ink)]/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--color-bone)] backdrop-blur-sm">
                 <LockSimple size={12} weight="bold" aria-hidden="true" />
@@ -134,50 +114,28 @@ export function PrintModal({ estampa, onClose }: PrintModalProps) {
               </span>
             </div>
 
-            {/* Ficha técnica */}
+            {/* Ficha técnica + orçamento */}
             <div className="flex flex-col p-7 md:p-9">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-indigo)]">
-                {estampa.familia}
+                {estampa.categoria ?? "Estampa"}
               </p>
               <h3 className="mt-2 font-display text-[clamp(26px,3vw,34px)] font-medium leading-tight text-ink">
                 {estampa.nome}
               </h3>
+              {estampa.descricao && (
+                <p className="mt-3 text-[15px] leading-[1.6] text-ink-2">{estampa.descricao}</p>
+              )}
 
               <dl className="mt-6">
-                <Ficha label="Referência" value={estampa.ref} />
-                <Ficha label="Base têxtil" value={estampa.base} />
-                <Ficha label="Gramatura" value={estampa.gramatura} />
-                <Ficha label="Processo" value={estampa.processo} />
-                <Ficha label="Resolução" value={estampa.resolucao} />
+                {linhasDaFicha(estampa).map(([label, value]) => (
+                  <Ficha key={label} label={label} value={value} />
+                ))}
               </dl>
 
-              {/* Aplicações (segmentos) */}
-              <p className="mt-7 font-mono text-[10.5px] uppercase tracking-[0.16em] text-ink-2">
-                Aplicações
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {aplicacoes[estampa.familia].map((a) => (
-                  <Chip key={a} as="span">
-                    {a}
-                  </Chip>
-                ))}
-              </div>
-
-              {/* Porta de saída: nítido, variantes e preço na Área do Cliente */}
+              {/* Porta de saída: orçamento pelo WhatsApp (grava na API) ou a
+                  Área do Cliente (nítido, variantes e preço) */}
               <div className="mt-8 border-t border-[var(--color-line)] pt-6 md:mt-auto">
-                <p className="text-[14.5px] leading-[1.55] text-ink-2">
-                  Cores nítidas, variantes de cartela e tabela de preços ficam
-                  na Área do Cliente.
-                </p>
-                <Button
-                  href={CATALOGO_URL}
-                  variant="indigo"
-                  external
-                  className="mt-4 w-full sm:w-auto"
-                >
-                  Ver nítido na Área do Cliente
-                  <ArrowUpRight size={15} weight="bold" aria-hidden="true" />
-                </Button>
+                <OrcamentoWhatsApp key={estampa.codigo} estampa={estampa} />
               </div>
             </div>
           </motion.div>
