@@ -91,7 +91,7 @@ export function OrcamentoWhatsApp({ estampa }: { estampa: Estampa }) {
     return (
       <div role="status">
         <p className={rotulo}>
-          {etapa.tipo === "registrado" ? `Pedido nº ${etapa.numero} registrado` : "Conversa pelo WhatsApp"}
+          {etapa.tipo === "registrado" ? `Orçamento nº ${etapa.numero} registrado` : "Conversa pelo WhatsApp"}
         </p>
         <p className="mt-2 text-[14.5px] leading-[1.55] text-ink-2">
           {etapa.tipo === "semRegistro" &&
